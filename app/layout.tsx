@@ -1,15 +1,15 @@
-import { Roboto } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import Footer from 'app/Footer';
-import Header from 'app/Header';
 
+import Container from 'src/components/Container';
 import { AppConfig } from 'src/config/AppConfig';
 
 import '../src/styles/global.css';
 
-const roboto = Roboto({
+const raleway = Raleway({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
-  variable: '--font-roboto',
+  variable: '--font-raleway',
 });
 
 export default function RootLayout({
@@ -18,12 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang={AppConfig.locale}>
-      <body className={`${roboto.variable} bg-gray-50 font-sans`}>
+    <html lang={AppConfig.locale} data-theme='dark'>
+      <body className={`${raleway.variable} font-sans`}>
         <div className='flex min-h-screen flex-col justify-between'>
           <div>
-            <Header />
-            <div className='h-full'>{children}</div>
+            {/* Todo: Add header */}
+            {/* <Header /> */}
+            <Container className='py-10'>{children}</Container>
           </div>
           <Footer />
         </div>
