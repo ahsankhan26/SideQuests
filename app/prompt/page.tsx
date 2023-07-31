@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import Typography from 'src/components/Typography';
+
 const RANDOM_LETTER_RANGE: [number, number] = [3, 10];
 
 const getRandomBetweenRange = (range: [number, number]) =>
@@ -34,13 +36,20 @@ const Prompt: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>Prompt</div>
-      <div className='w-full'>
-        {messages?.map((message, idx) => (
-          <div key={`${message}_${idx}`}>{message}</div>
-        ))}
-        <span>{visibleText}</span>
+    <div className='flex-center flex-col'>
+      <div className='my-10 text-4xl font-semibold text-primary-content'>
+        CatGPT
+      </div>
+      <Typography variant='subTitle2' className='text-accent'>
+        <p>Unleash the Purrfect Conversations!</p>
+      </Typography>
+      <div>
+        <div className='my-10 flex flex-col gap-4'>
+          {messages?.map((message, idx) => (
+            <div key={`${message}_${idx}`}>{message}</div>
+          ))}
+          <span>{visibleText}</span>
+        </div>
       </div>
 
       <button className='btn-primary btn' onClick={showPrompt}>

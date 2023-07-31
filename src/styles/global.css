@@ -6,4 +6,7 @@
   * {
     @apply box-border;
   }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
 }
