@@ -1,34 +1,33 @@
 'use client';
 
 import { useState } from 'react';
+import {
+  generateMessage,
+  getRandomBetweenRange,
+  LETTER_RANGE,
+} from 'app/prompt/utils';
+import classNames from 'classnames';
 
 import Typography from 'src/components/Typography';
-
-const RANDOM_LETTER_RANGE: [number, number] = [3, 10];
-
-const getRandomBetweenRange = (range: [number, number]) =>
-  Math.floor(Math.random() * (range[1] - range[0]) + range[0]);
 
 const Prompt: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [visibleText, setVisibleText] = useState('');
 
-  const originalText =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia fugit doloremque quaerat sit tenetur, magnam autem vel, accusantium ipsam ad facilis corporis! Natus, ea? Fugiat quisquam odio numquam exercitationem?';
-
   const showPrompt = () => {
+    const message = generateMessage();
     const interval = setInterval(() => {
       setVisibleText((prev) => {
         // check if prompt over
-        if (prev.length >= originalText.length) {
+        if (prev.length >= message.length) {
           clearInterval(interval);
           setMessages([...messages, prev]);
           return '';
         }
         // set new value continuing prev value length
-        const textToSet = `${prev}${originalText.slice(
+        const textToSet = `${prev}${message.slice(
           prev.length,
-          prev.length + getRandomBetweenRange(RANDOM_LETTER_RANGE),
+          prev.length + getRandomBetweenRange(LETTER_RANGE),
         )}`;
         return textToSet;
       });
@@ -41,19 +40,31 @@ const Prompt: React.FC = () => {
         CatGPT
       </div>
       <Typography variant='subTitle2' className='text-accent'>
-        <p>Unleash the Purrfect Conversations!</p>
+        <p>Purrfect Conversations!</p>
       </Typography>
-      <div>
+      <div className='my-10 flex h-96 w-full flex-col-reverse justify-between overflow-y-scroll rounded-lg bg-base-200 p-10'>
         <div className='my-10 flex flex-col gap-4'>
           {messages?.map((message, idx) => (
             <div key={`${message}_${idx}`}>{message}</div>
           ))}
-          <span>{visibleText}</span>
+          <span className='flex items-center'>
+            {visibleText}
+            {/* cursor */}
+            <div className='h-full w-0.5 bg-info' />
+          </span>
         </div>
       </div>
-
-      <button className='btn-primary btn' onClick={showPrompt}>
-        Start
+      <button
+        className={classNames('btn-primary btn-block btn', {
+          'btn-disabled': visibleText,
+        })}
+        onClick={showPrompt}
+      >
+        {/* spinner */}
+        <span
+          className={classNames({ 'loading loading-spinner': visibleText })}
+        />
+        Generate
       </button>
     </div>
   );
