@@ -5,14 +5,12 @@ interface IHomeCard {
   href: string;
 }
 
-export const HomeCard: React.FC<IHomeCard> = ({ title, href }) => {
-  return (
-    <Link href={href}>
-      <div className='card bg-primary shadow-xl'>
-        <div className='flex-center card-body'>
-          <h2 className='card-title'>{title}</h2>
-        </div>
+export const HomeCard: React.FC<IHomeCard> = ({ title, href }) => (
+  <Link href={href}>
+    <div className='card bg-primary shadow-xl'>
+      <div className='flex-center card-body'>
+        <h2 className='card-title'>{title}</h2>
       </div>
-    </Link>
-  );
-};
+    </div>
+  </Link>
+);

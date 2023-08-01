@@ -1,3 +1,6 @@
-// common.ts
-
-export {};
+export const homeCards = [
+  {
+    name: 'Prompt',
+    link: '/prompt',
+  },
+];

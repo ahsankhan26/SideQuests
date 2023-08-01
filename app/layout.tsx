@@ -1,5 +1,6 @@
 import { Raleway } from 'next/font/google';
 import Footer from 'app/Footer';
+import Header from 'app/Header';
 
 import Container from 'src/components/Container';
 import { AppConfig } from 'src/config/AppConfig';
@@ -21,11 +22,11 @@ export default function RootLayout({
     <html lang={AppConfig.locale} data-theme='dark'>
       <body className={`${raleway.variable} font-sans`}>
         <div className='flex min-h-screen flex-col justify-between'>
-          <div>
+          <Container>
             {/* Todo: Add header */}
-            {/* <Header /> */}
-            <Container className='py-10'>{children}</Container>
-          </div>
+            <Header />
+            {children}
+          </Container>
           <Footer />
         </div>
       </body>
