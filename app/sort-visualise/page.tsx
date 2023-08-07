@@ -1,3 +1,5 @@
+import Visualiser from 'app/sort-visualise/(Components)/Visualise';
+
 import { Hero } from '@/components';
 
 const SortVisualise: React.FC = () => (
@@ -6,6 +8,7 @@ const SortVisualise: React.FC = () => (
       title='Sort Visualise'
       subtitle='It illustrates the very famous Bubble Sort, trust me'
     />
+    <Visualiser />
   </div>
 );
 

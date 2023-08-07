@@ -4,9 +4,25 @@
 
 @layer components {
   * {
-    @apply box-border;
+    box-sizing: border-box;
+  }
+  .border-right {
+    @apply border-4;
+  }
+  .card-shadow {
+    box-shadow: 10px 10px 0px 0px #1e1e1e;
+    -webkit-box-shadow: 10px 10px 0px 0px #1e1e1e;
+    -moz-box-shadow: 10px 10px 0px 0px #1e1e1e;
+  }
+  .button-shadow {
+    box-shadow: 5px 5px 0px 0px #1e1e1e;
+    -webkit-box-shadow: 5px 5px 0px 0px #1e1e1e;
+    -moz-box-shadow: 5px 5px 0px 0px #1e1e1e;
   }
   .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-between {
     @apply flex items-center justify-center;
   }
 }
