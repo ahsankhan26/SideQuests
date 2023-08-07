@@ -7,4 +7,8 @@ export const homeCards = [
     name: 'Wordle Clone',
     link: 'https://word-hurdle.ahsankhan.me',
   },
+  {
+    name: 'Sort Visualise',
+    link: '/sort-visualise',
+  },
 ];
