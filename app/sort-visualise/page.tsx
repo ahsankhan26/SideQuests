@@ -8,7 +8,9 @@ const SortVisualise: React.FC = () => (
       title='Sort Visualise'
       subtitle='It illustrates the very famous Bubble Sort, trust me'
     />
-    <Visualiser />
+    <div className='bg-[#FFDCA8] p-5 text-[#1E1E1E]'>
+      <Visualiser />
+    </div>
   </div>
 );
 

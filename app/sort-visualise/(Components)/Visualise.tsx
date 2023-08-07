@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { FiRotateCw, FiX } from 'react-icons/fi';
 
 import { generateRandomArr, getRangeValue, isSorted } from './helpers';
 import RangeInput from './RangeInput';
-import ShuffleIcon from './ShuffleIcon';
+import SortButton from './SortButton';
 
 const valuesArr = [10, 50, 100, 200];
 const speedArr = [100, 50, 0];
@@ -23,7 +24,10 @@ const Visualiser: React.FC = () => {
     setArr(generateRandomArr(valNumber));
   }, [valNumber]);
 
-  const shuffle = () => setArr(generateRandomArr(valNumber));
+  const shuffle = () => {
+    setCurrent(0);
+    setArr(generateRandomArr(valNumber));
+  };
 
   const sort = async () => {
     if (isSorted(arr)) {
@@ -61,7 +65,7 @@ const Visualiser: React.FC = () => {
   return (
     <>
       {/* Form */}
-      <div className='flex-between mt-3 flex-col gap-4 md:flex-row'>
+      <div className='flex-between mt-3 flex-col gap-4 lg:flex-row'>
         <div className='flex w-full items-center gap-4'>
           <RangeInput
             title='Values'
@@ -78,6 +82,7 @@ const Visualiser: React.FC = () => {
           <RangeInput
             title='Speed'
             aria-label='Speed'
+            titleClassName='bg-[#DDC066]'
             disabled={inProgress}
             values={['1x', '2x', '🚀']}
             defaultValue={2}
@@ -88,8 +93,8 @@ const Visualiser: React.FC = () => {
             }}
           />
         </div>
-        <div className='flex h-full w-full gap-4 md:w-auto'>
-          <button
+        <div className='flex h-full w-full gap-4 lg:w-auto'>
+          <SortButton
             onClick={() => {
               if (inProgress) {
                 stopSort.current = true;
@@ -97,21 +102,17 @@ const Visualiser: React.FC = () => {
                 shuffle();
               }
             }}
-            className='flex-center button-shadow border-right enabled:hover:bg-purple/80 rounded px-6 py-2.5 text-3xl font-medium uppercase leading-tight text-white transition duration-150 ease-in-out active:scale-105 enabled:hover:rotate-1 disabled:opacity-50 enabled:md:hover:rotate-6'
           >
-            {inProgress ? 'Stop' : <ShuffleIcon />}
-          </button>
-          <button
-            onClick={sort}
-            disabled={inProgress}
-            className='button-shadow border-right bg-purple enabled:hover:bg-purple/80 w-full rounded px-6 py-2.5 text-3xl font-medium uppercase leading-tight text-white transition duration-150 ease-in-out active:scale-105 enabled:hover:rotate-1 disabled:opacity-50 enabled:md:hover:rotate-6'
-          >
+            {inProgress ? <FiX /> : <FiRotateCw />}
+          </SortButton>
+
+          <SortButton disabled={inProgress} onClick={sort} className='w-full'>
             Sort
-          </button>
+          </SortButton>
         </div>
       </div>
       {/* Preview */}
-      <div className='card-shadow border-text my-5 h-96 rounded border-4 bg-teal-500'>
+      <div className='card-shadow border-text my-5 h-96 rounded border-4 bg-accent'>
         <div className='flex h-full flex-col'>
           <div className='border-text border-b-4 bg-white py-3 text-center text-lg' />
           <div className='flex h-full' style={{ transform: 'rotateX(180deg)' }}>

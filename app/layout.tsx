@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang={AppConfig.locale} data-theme='dark'>
+    <html lang={AppConfig.locale}>
       <body className={`${raleway.variable} font-sans`}>
         <div className='flex min-h-screen flex-col justify-between'>
           <Container>

@@ -4,11 +4,11 @@ export const homeCards = [
     link: '/prompt',
   },
   {
-    name: 'Wordle Clone',
-    link: 'https://word-hurdle.ahsankhan.me',
-  },
-  {
     name: 'Sort Visualise',
     link: '/sort-visualise',
+  },
+  {
+    name: 'Wordle Clone',
+    link: 'https://word-hurdle.ahsankhan.me',
   },
 ];

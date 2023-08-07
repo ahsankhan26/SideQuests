@@ -6,12 +6,12 @@ interface IHero {
 }
 
 export const Hero: React.FC<IHero> = ({ title, subtitle = '' }) => (
-  <>
+  <div className='mb-5'>
     <div className='my-5 text-4xl font-semibold text-primary-content'>
       {title}
     </div>
     <Typography variant='subTitle2' className='text-accent'>
       <p>{subtitle}</p>
     </Typography>
-  </>
+  </div>
 );

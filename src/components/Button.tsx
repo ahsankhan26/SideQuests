@@ -2,7 +2,6 @@ import classNames from 'classnames';
 
 interface IButton extends React.ComponentProps<'button'> {
   loading?: boolean;
-  children?: React.ReactNode;
   fullWidth?: boolean;
 }
 
