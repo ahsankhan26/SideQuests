@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { FiRotateCw, FiX } from 'react-icons/fi';
+import classNames from 'classnames';
 
 import { generateRandomArr, getRangeValue, isSorted } from './helpers';
 import RangeInput from './RangeInput';
@@ -42,20 +43,16 @@ const Visualiser: React.FC = () => {
           setInProgress(false);
           return;
         }
-        // eslint-disable-next-line no-await-in-loop
-        await new Promise((resolve) =>
-          // eslint-disable-next-line no-promise-executor-return
-          setTimeout(() => {
-            resolve(0);
-          }, speed),
-        );
+
         if ((tempArr[j] as number) > (tempArr[j + 1] as number)) {
           const temp = tempArr[j] as number;
           tempArr[j] = tempArr[j + 1] as number;
           tempArr[j + 1] = temp;
         }
+        // eslint-disable-next-line no-promise-executor-return, no-await-in-loop
+        await new Promise((resolve) => setTimeout(() => resolve(0), speed));
         setCurrent(j + 1);
-        setArr(tempArr);
+        setArr([...tempArr]);
       }
     }
     setInProgress(false);
@@ -120,11 +117,11 @@ const Visualiser: React.FC = () => {
               <div
                 key={`${item}_${idx}`}
                 id={`arr_${item}_${idx}`}
-                className={`w-32 ${
-                  current === idx
-                    ? 'border-text border-2 border-t-0 bg-rose-500'
-                    : 'border bg-white'
-                }`}
+                className={classNames('w-32', {
+                  'border-text border-2 border-t-0 bg-rose-500':
+                    current === idx,
+                  'border bg-white': current !== idx,
+                })}
                 style={{ height: `${item}px` }}
               />
             ))}
