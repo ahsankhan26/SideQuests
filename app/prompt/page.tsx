@@ -6,9 +6,8 @@ import {
   getRandomBetweenRange,
   LETTER_RANGE,
 } from 'app/prompt/utils';
-import classNames from 'classnames';
 
-import Typography from 'src/components/Typography';
+import { Button, Hero } from '@/components';
 
 const Prompt: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -35,37 +34,29 @@ const Prompt: React.FC = () => {
   };
 
   return (
-    <div className='flex-center flex-col'>
-      <div className='my-10 text-4xl font-semibold text-primary-content'>
-        CatGPT
-      </div>
-      <Typography variant='subTitle2' className='text-accent'>
-        <p>Purrfect Conversations!</p>
-      </Typography>
-      <div className='my-10 flex h-96 w-full flex-col-reverse justify-between overflow-y-scroll rounded-lg bg-base-200 p-10'>
-        <div className='my-10 flex flex-col gap-4'>
-          {messages?.map((message, idx) => (
-            <div key={`${message}_${idx}`}>{message}</div>
-          ))}
-          <span className='flex items-center'>
-            {visibleText}
-            {/* cursor */}
-            <div className='h-full w-0.5 bg-info' />
-          </span>
+    <div>
+      <Hero title='CatGPT' subtitle='Purrfect Conversations!' />
+      <div className='flex-center flex-col'>
+        <div className='my-10 flex h-96 w-full flex-col-reverse justify-between overflow-y-scroll rounded-lg bg-base-200 p-10'>
+          <div className='my-10 flex flex-col gap-4'>
+            {messages?.map((message, idx) => (
+              <div key={`${message}_${idx}`}>{message}</div>
+            ))}
+            <span className='flex items-center'>
+              {visibleText}
+              <div className='h-full w-0.5 bg-info' /> {/* cursor */}
+            </span>
+          </div>
         </div>
+        <Button
+          disabled={!!visibleText}
+          loading={!!visibleText}
+          fullWidth
+          onClick={showPrompt}
+        >
+          Generate
+        </Button>
       </div>
-      <button
-        className={classNames('btn-primary btn-block btn', {
-          'btn-disabled': visibleText,
-        })}
-        onClick={showPrompt}
-      >
-        {/* spinner */}
-        <span
-          className={classNames({ 'loading loading-spinner': visibleText })}
-        />
-        Generate
-      </button>
     </div>
   );
 };

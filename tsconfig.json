@@ -30,16 +30,11 @@
     "noEmit": true,
     "isolatedModules": true,
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "src/*": ["./src/*"],
-      "public/*": ["./public/*"]
+      "@/*": ["./src/*"]
     },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "plugins": [{ "name": "next" }]
   },
   "exclude": ["./out/**/*", "./node_modules/**/*", "cypress/**/*.ts"],
   "include": [
