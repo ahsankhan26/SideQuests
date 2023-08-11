@@ -4,6 +4,7 @@ const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   plugins: [
+    require('tailwindcss-animated'),
     require('daisyui'),
     plugin(function ({ addBase }) {
       addBase({
