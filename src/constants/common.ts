@@ -11,4 +11,8 @@ export const homeCards = [
     name: 'Wordle Clone',
     link: 'https://word-hurdle.ahsankhan.me',
   },
+  {
+    name: 'Grid Visualisation',
+    link: '/grid',
+  },
 ];

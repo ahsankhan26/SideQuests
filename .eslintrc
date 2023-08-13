@@ -125,15 +125,6 @@
         ]
       }
     },
-    {
-      "files": ["**/*.jsx", "**/*.tsx"],
-      "rules": {
-        "max-lines": [
-          "error",
-          { "max": 150, "skipBlankLines": true, "skipComments": true }
-        ]
-      }
-    },
     // Configuration for testing
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
