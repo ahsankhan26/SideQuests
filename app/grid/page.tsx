@@ -1,21 +1,19 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { SelectInput } from 'app/grid/(Components)/Common';
+import {
+  getColSpan,
+  getColStart,
+  getGridCols,
+  getGridGap,
+  IAdvanceConfiguration,
+  IConfiguration,
+} from 'app/grid/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 import classNames from 'classnames';
 
 import { Hero } from '@/components';
-
-interface IConfiguration {
-  itemCount: number;
-  columns: number;
-  gap: number;
-}
-
-interface IAdvanceConfiguration {
-  colSpan?: number | 'auto';
-  colStart?: number | 'auto';
-}
 
 const GridFlex: React.FC = () => {
   const [configuration, setConfiguration] = useState<IConfiguration>({
@@ -93,6 +91,7 @@ const GridFlex: React.FC = () => {
             }
             range={[1, 12]}
             title='Columns'
+            titleClassName='bg-[#22a094]'
           />
           <RangeInput
             aria-label='Gap'
@@ -104,6 +103,7 @@ const GridFlex: React.FC = () => {
               handleConfigurationChange({ gap: Number(e.target.value) })
             }
             title='Gap'
+            titleClassName='bg-[#91a8ed]'
             values={[0, 1, 2, 3, 4, 5]}
           />
           {/* Advance */}
@@ -113,16 +113,15 @@ const GridFlex: React.FC = () => {
               Advance Settings
             </div>
             <div className='collapse-content flex flex-col gap-2'>
-              <div className='font-semibold underline'>Column Span</div>
-              {items.map((item) => (
-                <div
-                  className='flex-center gap-2 text-xs font-semibold'
-                  key={item}
-                >
-                  <div>{item}</div>
-                  <select
-                    className='select-bordered select w-full bg-white'
-                    onChange={(e) => {
+              {/* Column Span */}
+              <div className='collapse'>
+                <input type='checkbox' />
+                <div className='collapse-title underline'>Column Span</div>
+                <div className='collapse-content'>
+                  <SelectInput
+                    items={items}
+                    name='Span'
+                    onChange={(e, item) => {
                       const { value } = e.target;
                       handleAdvanceConfigurationChange(
                         {
@@ -133,33 +132,19 @@ const GridFlex: React.FC = () => {
                         item,
                       );
                     }}
-                  >
-                    <option value='auto'>Auto</option>
-                    <option value={1}>Span 1</option>
-                    <option value={2}>Span 2</option>
-                    <option value={3}>Span 3</option>
-                    <option value={4}>Span 4</option>
-                    <option value={5}>Span 5</option>
-                    <option value={6}>Span 6</option>
-                    <option value={7}>Span 7</option>
-                    <option value={8}>Span 8</option>
-                    <option value={9}>Span 9</option>
-                    <option value={10}>Span 10</option>
-                    <option value={11}>Span 11</option>
-                    <option value={12}>Span 12</option>
-                  </select>
+                  />
                 </div>
-              ))}
-              <div className='font-semibold underline'>Column Start</div>
-              {items.map((item) => (
-                <div
-                  className='flex-center gap-2 text-xs font-semibold'
-                  key={item}
-                >
-                  <div>{item}</div>
-                  <select
-                    className='select-bordered select w-full bg-white'
-                    onChange={(e) => {
+              </div>
+
+              {/* Column Start */}
+              <div className='collapse'>
+                <input type='checkbox' />
+                <div className='collapse-title underline'>Column Start</div>
+                <div className='collapse-content'>
+                  <SelectInput
+                    items={items}
+                    name='Start'
+                    onChange={(e, item) => {
                       const { value } = e.target;
                       handleAdvanceConfigurationChange(
                         {
@@ -170,53 +155,21 @@ const GridFlex: React.FC = () => {
                         item,
                       );
                     }}
-                  >
-                    <option value='auto'>Auto</option>
-                    <option value={1}>Start 1</option>
-                    <option value={2}>Start 2</option>
-                    <option value={3}>Start 3</option>
-                    <option value={4}>Start 4</option>
-                    <option value={5}>Start 5</option>
-                    <option value={6}>Start 6</option>
-                    <option value={7}>Start 7</option>
-                    <option value={8}>Start 8</option>
-                    <option value={9}>Start 9</option>
-                    <option value={10}>Start 10</option>
-                    <option value={11}>Start 11</option>
-                    <option value={12}>Start 12</option>
-                  </select>
+                  />
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* RIGHT */}
         <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
-          {/* Configurable */}
           <div
-            className={classNames('grid', {
-              // Columns
-              'grid-cols-1': configuration.columns === 1,
-              'grid-cols-2': configuration.columns === 2,
-              'grid-cols-3': configuration.columns === 3,
-              'grid-cols-4': configuration.columns === 4,
-              'grid-cols-5': configuration.columns === 5,
-              'grid-cols-6': configuration.columns === 6,
-              'grid-cols-7': configuration.columns === 7,
-              'grid-cols-8': configuration.columns === 8,
-              'grid-cols-9': configuration.columns === 9,
-              'grid-cols-10': configuration.columns === 10,
-              'grid-cols-11': configuration.columns === 11,
-              'grid-cols-12': configuration.columns === 12,
-              // Gaps
-              'gap-0': configuration.gap === 0,
-              'gap-1': configuration.gap === 1,
-              'gap-2': configuration.gap === 2,
-              'gap-3': configuration.gap === 3,
-              'gap-4': configuration.gap === 4,
-              'gap-5': configuration.gap === 5,
-            })}
+            className={classNames(
+              'grid',
+              getGridCols(configuration.columns),
+              getGridGap(configuration.gap),
+            )}
           >
             {items.map((item, idx) => {
               const colSpan = advanceConfiguration[idx]?.colSpan;
@@ -224,36 +177,9 @@ const GridFlex: React.FC = () => {
               return (
                 <div
                   className={classNames(
-                    'flex-center h-32 animate-fade bg-pink-500 py-5 text-2xl font-semibold transition animate-once hover:bg-pink-600',
-                    {
-                      'col-auto': colSpan === 'auto',
-                      'col-span-1': colSpan === 1,
-                      'col-span-2': colSpan === 2,
-                      'col-span-3': colSpan === 3,
-                      'col-span-4': colSpan === 4,
-                      'col-span-5': colSpan === 5,
-                      'col-span-6': colSpan === 6,
-                      'col-span-7': colSpan === 7,
-                      'col-span-8': colSpan === 8,
-                      'col-span-9': colSpan === 9,
-                      'col-span-10': colSpan === 10,
-                      'col-span-11': colSpan === 11,
-                      'col-span-12': colSpan === 12,
-                    },
-                    {
-                      'col-auto': colStart === 'auto',
-                      'col-start-2': colStart === 2,
-                      'col-start-3': colStart === 3,
-                      'col-start-4': colStart === 4,
-                      'col-start-5': colStart === 5,
-                      'col-start-6': colStart === 6,
-                      'col-start-7': colStart === 7,
-                      'col-start-8': colStart === 8,
-                      'col-start-9': colStart === 9,
-                      'col-start-10': colStart === 10,
-                      'col-start-11': colStart === 11,
-                      'col-start-12': colStart === 12,
-                    },
+                    'flex-center h-32 animate-fade bg-fuchsia-700 py-5 text-2xl font-semibold transition animate-once hover:bg-fuchsia-800',
+                    getColSpan(colSpan),
+                    getColStart(colStart),
                   )}
                   key={item}
                 >
