@@ -14,6 +14,20 @@ export const CAT_WORDS = [
   'Meowoo',
 ];
 
+export const CAT_EMOJIS = [
+  '😺',
+  '😸',
+  '😹',
+  '😻',
+  '😼',
+  '😽',
+  '🙀',
+  '😿',
+  '😾',
+  '🐈',
+  '🐈‍⬛',
+];
+
 export const getRandomBetweenRange = (range: [number, number]) =>
   Math.floor(Math.random() * (range[1] - range[0]) + range[0]);
 
@@ -22,6 +36,7 @@ export const generateMessage = () => {
   for (let i = 0; i < getRandomBetweenRange(SENTENCE_RANGE); i += 1) {
     message.push(CAT_WORDS[getRandomBetweenRange([0, CAT_WORDS.length - 1])]);
   }
+  message.push(CAT_EMOJIS[getRandomBetweenRange([0, CAT_EMOJIS.length - 1])]);
   message.push('.');
   return message.join(' ');
 };
