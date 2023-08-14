@@ -27,37 +27,35 @@ const Prompt: React.FC = () => {
   const [visibleText, setVisibleText] = useState('');
 
   const showPrompt = ({ messagesArr }: { messagesArr: string[] }) => {
-    const message = generateMessage();
-    const interval = setInterval(() => {
-      setVisibleText((prev) => {
-        // check if prompt over
-        if (prev.length >= message.length) {
-          clearInterval(interval);
-          setMessages([...messagesArr, prev]);
-          return '';
-        }
-        // set new value continuing prev value length
-        const textToSet = `${prev}${message.slice(
-          prev.length,
-          prev.length + getRandomBetweenRange(LETTER_RANGE),
-        )}`;
-        return textToSet;
-      });
-    }, 100);
+    return new Promise<void>((resolve) => {
+      const message = generateMessage();
+      const interval = setInterval(() => {
+        setVisibleText((prev) => {
+          // check if prompt over
+          if (prev.length >= message.length) {
+            clearInterval(interval);
+            resolve();
+            setMessages([...messagesArr, prev]);
+            return '';
+          }
+          // set new value continuing prev value length
+          const textToSet = `${prev}${message.slice(
+            prev.length,
+            prev.length + getRandomBetweenRange(LETTER_RANGE),
+          )}`;
+          return textToSet;
+        });
+      }, 100);
+    });
   };
 
-  const newPrompt: SubmitHandler<IForm> = ({ message }) => {
+  const newPrompt: SubmitHandler<IForm> = async ({ message }) => {
     const updatedMessages = [...messages, message];
     setMessages(updatedMessages);
-    showPrompt({ messagesArr: updatedMessages });
-    const inputElement: HTMLInputElement | null =
-      document.querySelector('#message');
-    if (inputElement) {
-      setTimeout(() => {
-        inputElement?.focus();
-      }, 0);
-    }
     reset();
+    await showPrompt({ messagesArr: updatedMessages });
+    const input: HTMLInputElement | null = document.querySelector('#message');
+    input?.focus();
   };
 
   return (

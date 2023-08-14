@@ -1,6 +1,6 @@
 export const homeCards = [
   {
-    name: 'Prompt',
+    name: 'Cat GPT',
     link: '/prompt',
   },
   {
