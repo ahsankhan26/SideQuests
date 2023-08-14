@@ -75,6 +75,7 @@
     "unused-imports/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
     "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
+    "react/jsx-sort-props": ["warn", { "ignoreCase": true }],
     "no-restricted-imports": [
       "error",
       {
@@ -121,15 +122,6 @@
               ["^\\u0000"]
             ]
           }
-        ]
-      }
-    },
-    {
-      "files": ["**/*.jsx", "**/*.tsx"],
-      "rules": {
-        "max-lines": [
-          "error",
-          { "max": 150, "skipBlankLines": true, "skipComments": true }
         ]
       }
     },
