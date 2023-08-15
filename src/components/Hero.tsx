@@ -10,7 +10,7 @@ export const Hero: React.FC<IHero> = ({ title, subtitle = '' }) => (
     <div className='my-5 text-4xl font-semibold text-primary-content'>
       {title}
     </div>
-    <Typography variant='subTitle2' className='text-accent'>
+    <Typography className='text-accent' variant='subTitle2'>
       <p>{subtitle}</p>
     </Typography>
   </div>

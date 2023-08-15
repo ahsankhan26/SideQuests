@@ -65,29 +65,29 @@ const Visualiser: React.FC = () => {
       <div className='flex-between mt-3 flex-col gap-4 lg:flex-row'>
         <div className='flex w-full items-center gap-4'>
           <RangeInput
-            title='Values'
             aria-label='Values'
+            defaultValue={3}
             disabled={inProgress}
             onChange={(e) => {
               const value = Number(e.target.value);
               const updatedValue = getRangeValue(valuesArr, value);
               if (updatedValue > -1) setValNumber(updatedValue);
             }}
-            defaultValue={3}
+            title='Values'
             values={valuesArr}
           />
           <RangeInput
-            title='Speed'
             aria-label='Speed'
-            titleClassName='bg-[#DDC066]'
-            disabled={inProgress}
-            values={['1x', '2x', '🚀']}
             defaultValue={2}
+            disabled={inProgress}
             onChange={(e) => {
               const value = Number(e.target.value);
               const updatedValue = getRangeValue(speedArr, value);
               if (updatedValue > -1) setSpeed(updatedValue);
             }}
+            title='Speed'
+            titleClassName='bg-[#DDC066]'
+            values={['1x', '2x', '🚀']}
           />
         </div>
         <div className='flex h-full w-full gap-4 lg:w-auto'>
@@ -103,7 +103,7 @@ const Visualiser: React.FC = () => {
             {inProgress ? <FiX /> : <FiRotateCw />}
           </SortButton>
 
-          <SortButton disabled={inProgress} onClick={sort} className='w-full'>
+          <SortButton className='w-full' disabled={inProgress} onClick={sort}>
             Sort
           </SortButton>
         </div>
@@ -115,13 +115,13 @@ const Visualiser: React.FC = () => {
           <div className='flex h-full' style={{ transform: 'rotateX(180deg)' }}>
             {arr.map((item, idx) => (
               <div
-                key={`${item}_${idx}`}
-                id={`arr_${item}_${idx}`}
                 className={classNames('w-32', {
                   'border-text border-2 border-t-0 bg-rose-500':
                     current === idx,
                   'border bg-white': current !== idx,
                 })}
+                id={`arr_${item}_${idx}`}
+                key={`${item}_${idx}`}
                 style={{ height: `${item}px` }}
               />
             ))}
