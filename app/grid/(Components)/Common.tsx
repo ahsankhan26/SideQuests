@@ -32,6 +32,9 @@ export const SelectInput: React.FC<ISelectInput> = ({
           <option value={10}>{`${name} 10`}</option>
           <option value={11}>{`${name} 11`}</option>
           <option value={12}>{`${name} 12`}</option>
+          {name.toLowerCase() === 'span' ? (
+            <option value={'full'}>{`${name} Full`}</option>
+          ) : null}
         </select>
       </div>
     ))}

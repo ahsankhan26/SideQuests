@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { SelectInput } from 'app/grid/(Components)/Common';
 import {
+  getColEnd,
   getColSpan,
   getColStart,
   getGridCols,
@@ -47,12 +48,13 @@ const GridFlex: React.FC = () => {
     index: number,
   ) => {
     const duplicateArr = [...advanceConfiguration];
-    const temp = advanceConfiguration[index - 1] ?? {};
+    const temp = advanceConfiguration[index - 1] || {};
 
     type ParamKeys = keyof typeof val;
     (Object.keys(val) as ParamKeys[]).forEach((key) => {
       const value = val[key];
       if (value !== undefined) {
+        // @ts-expect-error type assertion
         temp[key] = value;
       }
     });
@@ -123,10 +125,12 @@ const GridFlex: React.FC = () => {
                     name='Span'
                     onChange={(e, item) => {
                       const { value } = e.target;
+                      const isNaN = Number.isNaN(Number(value));
+                      const val = isNaN && value === 'full' ? 'full' : 'auto';
                       handleAdvanceConfigurationChange(
                         {
                           colSpan: Number.isNaN(Number(value))
-                            ? 'auto'
+                            ? val
                             : Number(value),
                         },
                         item,
@@ -158,6 +162,29 @@ const GridFlex: React.FC = () => {
                   />
                 </div>
               </div>
+
+              {/* Column End */}
+              <div className='collapse'>
+                <input type='checkbox' />
+                <div className='collapse-title underline'>Column End</div>
+                <div className='collapse-content'>
+                  <SelectInput
+                    items={items}
+                    name='End'
+                    onChange={(e, item) => {
+                      const { value } = e.target;
+                      handleAdvanceConfigurationChange(
+                        {
+                          colEnd: Number.isNaN(Number(value))
+                            ? 'auto'
+                            : Number(value),
+                        },
+                        item,
+                      );
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -174,12 +201,14 @@ const GridFlex: React.FC = () => {
             {items.map((item, idx) => {
               const colSpan = advanceConfiguration[idx]?.colSpan;
               const colStart = advanceConfiguration[idx]?.colStart;
+              const colEnd = advanceConfiguration[idx]?.colEnd;
               return (
                 <div
                   className={classNames(
                     'flex-center h-32 animate-fade bg-fuchsia-700 py-5 text-2xl font-semibold transition animate-once hover:bg-fuchsia-800',
                     getColSpan(colSpan),
                     getColStart(colStart),
+                    getColEnd(colEnd),
                   )}
                   key={item}
                 >
