@@ -18,39 +18,38 @@ const Meta = (props: IMetaProps) => {
       <Head>
         <meta charSet='UTF-8' key='charset' />
         <meta
-          name='viewport'
           content='width=device-width,initial-scale=1'
           key='viewport'
+          name='viewport'
         />
         <link
-          rel='apple-touch-icon'
           href={`${router.basePath}/apple-touch-icon.png`}
           key='apple'
+          rel='apple-touch-icon'
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='32x32'
           href={`${router.basePath}/favicon-32x32.png`}
           key='icon32'
+          rel='icon'
+          sizes='32x32'
+          type='image/png'
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='16x16'
           href={`${router.basePath}/favicon-16x16.png`}
           key='icon16'
+          rel='icon'
+          sizes='16x16'
+          type='image/png'
         />
         <link
-          rel='icon'
           href={`${router.basePath}/favicon.ico`}
           key='favicon'
+          rel='icon'
         />
       </Head>
       <NextSeo
-        title={props.title}
-        description={props.description}
         canonical={props.canonical}
+        description={props.description}
         openGraph={{
           title: props.title,
           description: props.description,
@@ -58,6 +57,7 @@ const Meta = (props: IMetaProps) => {
           locale: AppConfig.locale,
           site_name: AppConfig.site_name,
         }}
+        title={props.title}
       />
     </>
   );
