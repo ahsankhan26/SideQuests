@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
-import { FiClipboard, FiCode, FiEye } from 'react-icons/fi';
+import { FiClipboard } from 'react-icons/fi';
 import {
   prettifiedHtmlString,
   SelectInput,
@@ -24,6 +24,7 @@ import { copyToClipboard } from '@/utils/common';
 
 const GridFlex: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
+  const [codeText, setCodeText] = useState('');
   const [configuration, setConfiguration] = useState<IConfiguration>({
     itemCount: 6,
     columns: 3,
@@ -37,18 +38,6 @@ const GridFlex: React.FC = () => {
     () => new Array(configuration.itemCount).fill(0).map((_, idx) => idx + 1),
     [configuration.itemCount],
   );
-
-  const codeText = useMemo(() => {
-    const outerHtml = document.querySelector('#grid')?.outerHTML;
-    if (outerHtml) {
-      return prettifiedHtmlString(outerHtml);
-    }
-    return null;
-  }, [
-    configuration,
-    advanceConfiguration,
-    document.querySelector('#grid')?.outerHTML,
-  ]);
 
   const handleConfigurationChange = (val: Partial<IConfiguration>) => {
     const temp = { ...configuration };
@@ -83,37 +72,21 @@ const GridFlex: React.FC = () => {
     }
   };
 
+  const toggleCode = () => {
+    setShowCode(!showCode);
+    if (!showCode) {
+      const outerHtml = document?.querySelector('#grid')?.outerHTML;
+      const code = prettifiedHtmlString(outerHtml ?? '');
+      setCodeText(code);
+    }
+  };
+
   return (
     <div>
       <Hero
         subtitle='Visualisation for understanding CSS Grid'
         title='CSS Grid'
       />
-      <div className='mb-5 flex items-center justify-end gap-2'>
-        <div className='tooltip-primary tooltip' data-tip='Copy to clipboard'>
-          <Button
-            className='btn-primary btn-outline btn-sm bg-stone-200'
-            disabled={!codeText}
-            onClick={() => {
-              if (codeText) {
-                copyToClipboard(codeText);
-              }
-            }}
-          >
-            <FiClipboard className='swap-off' size={18} />
-          </Button>
-        </div>
-        <div
-          className='tooltip-primary tooltip'
-          data-tip={showCode ? 'Preview' : 'Code'}
-        >
-          <label className='swap btn-primary btn-outline swap-rotate btn-sm btn bg-stone-200'>
-            <input onClick={() => setShowCode(!showCode)} type='checkbox' />
-            <FiEye className='swap-on' size={18} />
-            <FiCode className='swap-off' size={18} />
-          </label>
-        </div>
-      </div>
       <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
         {/* LEFT */}
         <div className='button-shadow flex flex-col gap-5 bg-stone-200 p-5 md:col-span-3'>
@@ -237,6 +210,12 @@ const GridFlex: React.FC = () => {
               </div>
             </div>
           </div>
+          {/* Generate Button */}
+          <label className='button-shadow swap btn-primary btn-outline btn rounded-none'>
+            <input onClick={toggleCode} type='checkbox' />
+            <div className='swap-off'>Generate Code</div>
+            <div className='swap-on'>Preview</div>
+          </label>
         </div>
 
         {/* RIGHT */}
@@ -270,7 +249,22 @@ const GridFlex: React.FC = () => {
               })}
             </div>
           ) : (
-            <Highlight className='grid-code html h-full'>{codeText}</Highlight>
+            <div className='relative h-full animate-fade animate-once'>
+              <div
+                className='tooltip-primary tooltip absolute right-2 top-2'
+                data-tip='Copy to clipboard'
+              >
+                <Button
+                  className='btn-primary btn-sm'
+                  onClick={() => copyToClipboard(codeText)}
+                >
+                  <FiClipboard />
+                </Button>
+              </div>
+              <Highlight className='grid-code html h-full'>
+                {codeText}
+              </Highlight>
+            </div>
           )}
         </div>
       </div>
