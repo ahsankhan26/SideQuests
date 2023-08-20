@@ -10,17 +10,18 @@ export const Button: React.FC<IButton> = ({
   loading,
   fullWidth,
   children,
+  className = '',
   ...rest
 }) => (
   <button
-    className={classNames('btn-primary btn', {
+    className={classNames(`btn ${className}`, {
       'btn-disabled': disabled,
       'btn-block': fullWidth,
     })}
     {...rest}
   >
     {/* spinner */}
-    <span className={classNames({ 'loading loading-spinner': loading })} />
+    {loading ? <span className='loading loading-spinner' /> : null}
     {children}
   </button>
 );

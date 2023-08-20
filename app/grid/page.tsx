@@ -1,7 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { SelectInput } from 'app/grid/(Components)/Common';
+import Highlight from 'react-highlight';
+import { FiClipboard, FiCode, FiEye } from 'react-icons/fi';
+import {
+  prettifiedHtmlString,
+  SelectInput,
+} from 'app/grid/(Components)/Common';
 import {
   getColEnd,
   getColSpan,
@@ -14,9 +19,11 @@ import {
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 import classNames from 'classnames';
 
-import { Hero } from '@/components';
+import { Button, Hero } from '@/components';
+import { copyToClipboard } from '@/utils/common';
 
 const GridFlex: React.FC = () => {
+  const [showCode, setShowCode] = useState(false);
   const [configuration, setConfiguration] = useState<IConfiguration>({
     itemCount: 6,
     columns: 3,
@@ -30,6 +37,18 @@ const GridFlex: React.FC = () => {
     () => new Array(configuration.itemCount).fill(0).map((_, idx) => idx + 1),
     [configuration.itemCount],
   );
+
+  const codeText = useMemo(() => {
+    const outerHtml = document.querySelector('#grid')?.outerHTML;
+    if (outerHtml) {
+      return prettifiedHtmlString(outerHtml);
+    }
+    return null;
+  }, [
+    configuration,
+    advanceConfiguration,
+    document.querySelector('#grid')?.outerHTML,
+  ]);
 
   const handleConfigurationChange = (val: Partial<IConfiguration>) => {
     const temp = { ...configuration };
@@ -70,12 +89,38 @@ const GridFlex: React.FC = () => {
         subtitle='Visualisation for understanding CSS Grid'
         title='CSS Grid'
       />
+      <div className='mb-5 flex items-center justify-end gap-2'>
+        <div className='tooltip-primary tooltip' data-tip='Copy to clipboard'>
+          <Button
+            className='btn-primary btn-outline btn-sm bg-stone-200'
+            disabled={!codeText}
+            onClick={() => {
+              if (codeText) {
+                copyToClipboard(codeText);
+              }
+            }}
+          >
+            <FiClipboard className='swap-off' size={18} />
+          </Button>
+        </div>
+        <div
+          className='tooltip-primary tooltip'
+          data-tip={showCode ? 'Preview' : 'Code'}
+        >
+          <label className='swap btn-primary btn-outline swap-rotate btn-sm btn bg-stone-200'>
+            <input onClick={() => setShowCode(!showCode)} type='checkbox' />
+            <FiEye className='swap-on' size={18} />
+            <FiCode className='swap-off' size={18} />
+          </label>
+        </div>
+      </div>
       <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
         {/* LEFT */}
         <div className='button-shadow flex flex-col gap-5 bg-stone-200 p-5 md:col-span-3'>
           <RangeInput
             aria-label='Count'
             defaultValue={configuration.itemCount}
+            disabled={showCode}
             fullWidth
             onChange={(e) =>
               handleConfigurationChange({ itemCount: Number(e.target.value) })
@@ -87,6 +132,7 @@ const GridFlex: React.FC = () => {
           <RangeInput
             aria-label='Columns'
             defaultValue={configuration.columns}
+            disabled={showCode}
             fullWidth
             onChange={(e) =>
               handleConfigurationChange({ columns: Number(e.target.value) })
@@ -98,6 +144,7 @@ const GridFlex: React.FC = () => {
           <RangeInput
             aria-label='Gap'
             defaultValue={configuration.gap}
+            disabled={showCode}
             fullWidth
             max={'5'}
             min={'0'}
@@ -121,6 +168,7 @@ const GridFlex: React.FC = () => {
                 <div className='collapse-title underline'>Column Span</div>
                 <div className='collapse-content'>
                   <SelectInput
+                    disabled={showCode}
                     items={items}
                     name='Span'
                     onChange={(e, item) => {
@@ -146,6 +194,7 @@ const GridFlex: React.FC = () => {
                 <div className='collapse-title underline'>Column Start</div>
                 <div className='collapse-content'>
                   <SelectInput
+                    disabled={showCode}
                     items={items}
                     name='Start'
                     onChange={(e, item) => {
@@ -169,6 +218,7 @@ const GridFlex: React.FC = () => {
                 <div className='collapse-title underline'>Column End</div>
                 <div className='collapse-content'>
                   <SelectInput
+                    disabled={showCode}
                     items={items}
                     name='End'
                     onChange={(e, item) => {
@@ -191,32 +241,37 @@ const GridFlex: React.FC = () => {
 
         {/* RIGHT */}
         <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
-          <div
-            className={classNames(
-              'grid',
-              getGridCols(configuration.columns),
-              getGridGap(configuration.gap),
-            )}
-          >
-            {items.map((item, idx) => {
-              const colSpan = advanceConfiguration[idx]?.colSpan;
-              const colStart = advanceConfiguration[idx]?.colStart;
-              const colEnd = advanceConfiguration[idx]?.colEnd;
-              return (
-                <div
-                  className={classNames(
-                    'flex-center h-32 animate-fade bg-fuchsia-700 py-5 text-2xl font-semibold transition animate-once hover:bg-fuchsia-800',
-                    getColSpan(colSpan),
-                    getColStart(colStart),
-                    getColEnd(colEnd),
-                  )}
-                  key={item}
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
+          {!showCode ? (
+            <div
+              className={classNames(
+                'grid',
+                getGridCols(configuration.columns),
+                getGridGap(configuration.gap),
+              )}
+              id='grid'
+            >
+              {items.map((item, idx) => {
+                const colSpan = advanceConfiguration[idx]?.colSpan;
+                const colStart = advanceConfiguration[idx]?.colStart;
+                const colEnd = advanceConfiguration[idx]?.colEnd;
+                return (
+                  <div
+                    className={classNames(
+                      'flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800',
+                      getColSpan(colSpan),
+                      getColStart(colStart),
+                      getColEnd(colEnd),
+                    )}
+                    key={item}
+                  >
+                    {item}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <Highlight className='grid-code html h-full'>{codeText}</Highlight>
+          )}
         </div>
       </div>
     </div>

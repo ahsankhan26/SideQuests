@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~highlight.js/styles/monokai.css';
+
 @layer components {
   * {
     box-sizing: border-box;
@@ -21,5 +23,12 @@
   }
   .flex-between {
     @apply flex items-center justify-center;
+  }
+  /* 
+  for pre tag added by `react-highlight` package, 
+  can't access pre tag from props.
+   */
+  pre {
+    height: 100%;
   }
 }
