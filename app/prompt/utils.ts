@@ -37,6 +37,14 @@ export const generateMessage = () => {
     message.push(CAT_WORDS[getRandomBetweenRange([0, CAT_WORDS.length - 1])]);
   }
   message.push(CAT_EMOJIS[getRandomBetweenRange([0, CAT_EMOJIS.length - 1])]);
-  message.push('.');
   return message.join(' ');
+};
+
+export const scrolltoBottom = (id: string) => {
+  if (typeof document !== 'undefined') {
+    const element = document.querySelector(id);
+    if (element?.scrollTop) {
+      element.scrollTop = element?.scrollHeight;
+    }
+  }
 };
