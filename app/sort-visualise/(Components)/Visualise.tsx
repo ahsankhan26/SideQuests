@@ -63,7 +63,7 @@ const Visualiser: React.FC = () => {
     <>
       {/* Form */}
       <div className='flex-between mt-3 flex-col gap-4 lg:flex-row'>
-        <div className='flex w-full items-center gap-4'>
+        <div className='flex w-full flex-col items-center gap-4 md:flex-row'>
           <RangeInput
             aria-label='Values'
             defaultValue={3}
