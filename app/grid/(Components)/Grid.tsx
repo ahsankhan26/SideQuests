@@ -204,6 +204,7 @@ const Grid: React.FC = () => {
         {/* Reset Button */}
         <Button
           className='button-shadow btn-accent btn-outline rounded-none'
+          disabled={showCode}
           onClick={() => {
             setConfiguration(initialConfiguration);
             setAdvanceConfiguration([]);
