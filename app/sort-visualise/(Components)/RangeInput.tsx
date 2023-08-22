@@ -41,7 +41,7 @@ const RangeInput: React.FC<IRangeInput> = ({
         </div>
         <div className='px-5 py-1'>
           <input
-            className='w-full accent-[#D45CC0]'
+            className='w-full cursor-pointer accent-[#D45CC0]'
             defaultValue={defaultValue}
             max={max}
             min={min}
@@ -58,7 +58,9 @@ const RangeInput: React.FC<IRangeInput> = ({
             {range ? (
               <>
                 <span>{range[0]}</span>
-                <span className='font-semibold underline'>{currentVal}</span>
+                <span className='font-semibold underline underline-offset-4'>
+                  {currentVal}
+                </span>
                 <span>{range[1]}</span>
               </>
             ) : null}
