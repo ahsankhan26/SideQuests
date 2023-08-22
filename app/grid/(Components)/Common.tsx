@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import htmlFormatter from 'pretty';
 
 interface ISelectInput {
   items: number[];
@@ -44,17 +43,3 @@ export const SelectInput: React.FC<ISelectInput> = ({
     ))}
   </>
 );
-
-export const prettifiedHtmlString = (html: string) => {
-  // remove redundant classes
-  let filtered = html.replaceAll('animate-fade', '');
-  filtered = filtered.replaceAll('animate-once', '');
-  filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
-  filtered = filtered.replaceAll('id="grid"', '');
-  filtered = filtered.replaceAll('font-semibold', '');
-  filtered = filtered.replaceAll('col-start-auto', '');
-  filtered = filtered.replaceAll('col-span-auto', '');
-  filtered = filtered.replaceAll('col-end-auto', '');
-  filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
-  return htmlFormatter(filtered);
-};
