@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 interface IRangeInput extends React.ComponentProps<'input'> {
@@ -20,10 +20,16 @@ const RangeInput: React.FC<IRangeInput> = ({
   defaultValue = 1,
   titleClassName = '',
   fullWidth,
-  onChange,
+  value,
   ...rest
 }) => {
-  const [currentVal, setCurrentVal] = useState('');
+  const [currentVal, setCurrentVal] = useState(value ?? '');
+
+  useEffect(() => {
+    if (value) {
+      setCurrentVal(value.toString());
+    }
+  }, [value]);
   return (
     <fieldset
       className={classNames(
@@ -45,13 +51,8 @@ const RangeInput: React.FC<IRangeInput> = ({
             defaultValue={defaultValue}
             max={max}
             min={min}
-            onChange={(e) => {
-              setCurrentVal(e.target.value.toString());
-              if (onChange) {
-                onChange(e);
-              }
-            }}
             type='range'
+            value={value}
             {...rest}
           />
           <div aria-hidden='true' className='flex justify-between px-1'>
@@ -64,8 +65,8 @@ const RangeInput: React.FC<IRangeInput> = ({
                 <span>{range[1]}</span>
               </>
             ) : null}
-            {values?.map((value) => (
-              <span key={value}>{value}</span>
+            {values?.map((val) => (
+              <span key={val}>{val}</span>
             ))}
           </div>
         </div>

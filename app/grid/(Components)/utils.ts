@@ -1,3 +1,5 @@
+import htmlFormatter from 'pretty';
+
 export interface IConfiguration {
   itemCount: number;
   columns: number;
@@ -5,8 +7,9 @@ export interface IConfiguration {
 }
 
 export interface IAdvanceConfiguration {
-  colSpan?: number | 'auto';
+  colSpan?: number | 'auto' | 'full';
   colStart?: number | 'auto';
+  colEnd?: number | 'auto';
 }
 
 export const getGridCols = (columns: number) => {
@@ -37,7 +40,7 @@ export const getGridGap = (gap: number) => {
   };
 };
 
-export const getColSpan = (colSpan: number | 'auto' | undefined) => {
+export const getColSpan = (colSpan: number | 'auto' | 'full' | undefined) => {
   return {
     'col-auto': colSpan === 'auto',
     'col-span-1': colSpan === 1,
@@ -52,11 +55,12 @@ export const getColSpan = (colSpan: number | 'auto' | undefined) => {
     'col-span-10': colSpan === 10,
     'col-span-11': colSpan === 11,
     'col-span-12': colSpan === 12,
+    'col-span-full': colSpan === 'full',
   };
 };
 export const getColStart = (colStart: number | 'auto' | undefined) => {
   return {
-    'col-auto': colStart === 'auto',
+    'col-start-auto': colStart === 'auto',
     'col-start-2': colStart === 2,
     'col-start-3': colStart === 3,
     'col-start-4': colStart === 4,
@@ -69,4 +73,34 @@ export const getColStart = (colStart: number | 'auto' | undefined) => {
     'col-start-11': colStart === 11,
     'col-start-12': colStart === 12,
   };
+};
+export const getColEnd = (colEnd: number | 'auto' | undefined) => {
+  return {
+    'col-end-auto': colEnd === 'auto',
+    'col-end-2': colEnd === 2,
+    'col-end-3': colEnd === 3,
+    'col-end-4': colEnd === 4,
+    'col-end-5': colEnd === 5,
+    'col-end-6': colEnd === 6,
+    'col-end-7': colEnd === 7,
+    'col-end-8': colEnd === 8,
+    'col-end-9': colEnd === 9,
+    'col-end-10': colEnd === 10,
+    'col-end-11': colEnd === 11,
+    'col-end-12': colEnd === 12,
+  };
+};
+
+export const prettifiedHtmlString = (html: string) => {
+  // remove redundant classes
+  let filtered = html.replaceAll('animate-fade', '');
+  filtered = filtered.replaceAll('animate-once', '');
+  filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
+  filtered = filtered.replaceAll('id="grid"', '');
+  filtered = filtered.replaceAll('font-semibold', '');
+  filtered = filtered.replaceAll('col-start-auto', '');
+  filtered = filtered.replaceAll('col-span-auto', '');
+  filtered = filtered.replaceAll('col-end-auto', '');
+  filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
+  return htmlFormatter(filtered);
 };
