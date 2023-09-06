@@ -3,18 +3,17 @@
 import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
-import { Select } from 'app/flex/(Components)/Common';
+import { MenuTitle, Radio } from 'app/flex/(Components)/Common';
 import {
-  ALIGN_ITEMS,
-  DIRECTION,
-  getFlexGap,
+  alignItemsButtons,
+  directionButtons,
   IConfiguration,
   initialConfiguration,
-  JUSTIFY_CONTENT,
-  prettifiedHtmlString,
-  WIDTH,
-  WRAP,
-} from 'app/flex/(Components)/utils';
+  justifyContentButtons,
+  widthButtons,
+  wrapButtons,
+} from 'app/flex/(Components)/constants';
+import { getFlexGap, prettifiedHtmlString } from 'app/flex/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 import classNames from 'classnames';
 
@@ -59,6 +58,7 @@ const Flexbox: React.FC = () => {
     <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
       {/* LEFT */}
       <div className='button-shadow flex flex-col gap-5 bg-stone-200 p-5 md:col-span-3'>
+        {/* Count */}
         <RangeInput
           aria-label='Count'
           disabled={showCode}
@@ -71,7 +71,7 @@ const Flexbox: React.FC = () => {
           titleClassName='bg-[#ff91e7]'
           value={configuration.itemCount}
         />
-        {/* GAP */}
+        {/* Gap */}
         <RangeInput
           aria-label='Gap'
           disabled={showCode}
@@ -87,81 +87,90 @@ const Flexbox: React.FC = () => {
           values={[0, 1, 2, 3, 4, 5]}
         />
         {/* Width */}
-        <Select
-          disabled={showCode}
-          onChange={(e) => {
-            const value = e.target.value as WIDTH;
-            handleConfigurationChange({ width: value });
-          }}
-          title='Width'
-          value={configuration.width}
-        >
-          <option value={WIDTH.AUTO}>Auto</option>
-          <option value={WIDTH.FIXED}>Fixed</option>
-          <option value={WIDTH.FULL}>Full</option>
-        </Select>
+        <div>
+          <MenuTitle>Width</MenuTitle>
+          <div className='flex items-center gap-2'>
+            {widthButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.width === value}
+                key={name}
+                label={name}
+                name={name}
+                onChange={() => handleConfigurationChange({ width: value })}
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Wrap */}
-        <Select
-          disabled={showCode}
-          onChange={(e) => {
-            const value = e.target.value as WRAP;
-            handleConfigurationChange({ wrap: value });
-          }}
-          title='Wrap'
-          value={configuration.wrap}
-        >
-          <option value={WRAP.NOWRAP}>No Wrap</option>
-          <option value={WRAP.WRAP}>Flex Wrap</option>
-          <option value={WRAP.WRAP_REVERSED}>Flex Wrap Reversed</option>
-        </Select>
-        {/* Direction */}
-        <Select
-          disabled={showCode}
-          onChange={(e) => {
-            const value = e.target.value as DIRECTION;
-            handleConfigurationChange({ direction: value });
-          }}
-          title='Flex Direction'
-          value={configuration.direction}
-        >
-          <option value={DIRECTION.ROW}>Row</option>
-          <option value={DIRECTION.ROW_REVERSE}>Row Reversed</option>
-          <option value={DIRECTION.COLUMN}>Column</option>
-          <option value={DIRECTION.COLUMN_REVERSE}>Column Reversed</option>
-        </Select>
+        <div>
+          <MenuTitle>Wrap</MenuTitle>
+          <div className='flex flex-wrap items-center gap-2'>
+            {wrapButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.wrap === value}
+                key={name}
+                label={name}
+                onChange={() => handleConfigurationChange({ wrap: value })}
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Flex Direction */}
+        <div>
+          <MenuTitle>Flex Direction</MenuTitle>
+          <div className='flex flex-wrap items-center gap-2'>
+            {directionButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.direction === value}
+                key={name}
+                label={name}
+                onChange={() => handleConfigurationChange({ direction: value })}
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Justify Content */}
-        <Select
-          disabled={showCode}
-          onChange={(e) => {
-            const value = e.target.value as JUSTIFY_CONTENT;
-            handleConfigurationChange({ justifyContent: value });
-          }}
-          title='Justify Content'
-          value={configuration.justifyContent}
-        >
-          <option value={JUSTIFY_CONTENT.START}>Start</option>
-          <option value={JUSTIFY_CONTENT.END}>End</option>
-          <option value={JUSTIFY_CONTENT.CENTER}>Center</option>
-          <option value={JUSTIFY_CONTENT.BETWEEN}>Between</option>
-          <option value={JUSTIFY_CONTENT.EVENLY}>Evenly</option>
-          <option value={JUSTIFY_CONTENT.AROUND}>Around</option>
-        </Select>
+        <div>
+          <MenuTitle>Justify Content</MenuTitle>
+          <div className='flex flex-wrap items-center gap-2'>
+            {justifyContentButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.justifyContent === value}
+                key={name}
+                label={name}
+                onChange={() =>
+                  handleConfigurationChange({ justifyContent: value })
+                }
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Align Items */}
-        <Select
-          disabled={showCode}
-          onChange={(e) => {
-            const value = e.target.value as ALIGN_ITEMS;
-            handleConfigurationChange({ alignItems: value });
-          }}
-          title='Align Items'
-          value={configuration.alignItems}
-        >
-          <option value={ALIGN_ITEMS.BASELINE}>Baseline</option>
-          <option value={ALIGN_ITEMS.START}>Start</option>
-          <option value={ALIGN_ITEMS.END}>End</option>
-          <option value={ALIGN_ITEMS.CENTER}>Center</option>
-          <option value={ALIGN_ITEMS.STRETCH}>Stretch</option>
-        </Select>
+        <div>
+          <MenuTitle>Align Items</MenuTitle>
+          <div className='flex flex-wrap items-center gap-2'>
+            {alignItemsButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.alignItems === value}
+                key={name}
+                label={name}
+                name={`items_${name}`}
+                onChange={() =>
+                  handleConfigurationChange({ alignItems: value })
+                }
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Reset Button */}
         <Button
