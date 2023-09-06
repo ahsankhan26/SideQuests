@@ -5,6 +5,7 @@ import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
 import { Select } from 'app/flex/(Components)/Common';
 import {
+  ALIGN_ITEMS,
   DIRECTION,
   getFlexGap,
   IConfiguration,
@@ -145,6 +146,22 @@ const Flexbox: React.FC = () => {
           <option value={JUSTIFY_CONTENT.EVENLY}>Evenly</option>
           <option value={JUSTIFY_CONTENT.AROUND}>Around</option>
         </Select>
+        {/* Align Items */}
+        <Select
+          disabled={showCode}
+          onChange={(e) => {
+            const value = e.target.value as ALIGN_ITEMS;
+            handleConfigurationChange({ alignItems: value });
+          }}
+          title='Align Items'
+          value={configuration.alignItems}
+        >
+          <option value={ALIGN_ITEMS.BASELINE}>Baseline</option>
+          <option value={ALIGN_ITEMS.START}>Start</option>
+          <option value={ALIGN_ITEMS.END}>End</option>
+          <option value={ALIGN_ITEMS.CENTER}>Center</option>
+          <option value={ALIGN_ITEMS.STRETCH}>Stretch</option>
+        </Select>
 
         {/* Reset Button */}
         <Button
@@ -167,7 +184,7 @@ const Flexbox: React.FC = () => {
         {!showCode ? (
           <div
             className={classNames(
-              `flex transition-all duration-500 ease-in-out ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent}`,
+              `flex transition-all duration-500 ease-in-out ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems}`,
               getFlexGap(configuration.gap),
             )}
             id='flex'

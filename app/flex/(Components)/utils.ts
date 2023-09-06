@@ -24,6 +24,13 @@ export enum JUSTIFY_CONTENT {
   AROUND = 'justify-around',
   EVENLY = 'justify-evenly',
 }
+export enum ALIGN_ITEMS {
+  START = 'items-start',
+  END = 'items-end',
+  CENTER = 'items-center',
+  BASELINE = 'items-baseline',
+  STRETCH = 'items-stretch',
+}
 
 export interface IConfiguration {
   itemCount: number;
@@ -32,15 +39,17 @@ export interface IConfiguration {
   width: WIDTH;
   direction: DIRECTION;
   justifyContent: JUSTIFY_CONTENT;
+  alignItems: ALIGN_ITEMS;
 }
 
-export const initialConfiguration = {
+export const initialConfiguration: IConfiguration = {
   itemCount: 5,
   gap: 2,
   wrap: WRAP.WRAP,
   width: WIDTH.FIXED,
   direction: DIRECTION.ROW,
   justifyContent: JUSTIFY_CONTENT.START,
+  alignItems: ALIGN_ITEMS.BASELINE,
 };
 
 export const getFlexGap = (gap: number) => {
