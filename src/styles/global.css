@@ -22,7 +22,7 @@
     @apply flex items-center justify-center;
   }
   .flex-between {
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-between;
   }
   /* 
   for pre tag added by `react-highlight` package, 

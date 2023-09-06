@@ -15,4 +15,8 @@ export const homeCards = [
     name: 'Grid Visualisation',
     link: '/grid',
   },
+  {
+    name: 'Flexbox Visualisation',
+    link: '/flex',
+  },
 ];

@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import Grid from 'app/grid/(Components)/Grid';
+import dynamic from 'next/dynamic';
 
 import { Hero } from '@/components';
+
+const Grid = dynamic(() => import('app/grid/(Components)/Grid'), {
+  loading: () => <p>Loading ...</p>,
+});
 
 export const metadata: Metadata = {
   title: 'Grid Visualise - SideQuests',

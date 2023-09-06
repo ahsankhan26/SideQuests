@@ -48,7 +48,7 @@ const RangeInput: React.FC<IRangeInput> = ({
         <div className='px-5 py-1'>
           <input
             className='w-full cursor-pointer accent-[#D45CC0]'
-            defaultValue={defaultValue}
+            defaultValue={!value ? defaultValue : undefined}
             max={max}
             min={min}
             type='range'
