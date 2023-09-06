@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 import Footer from 'app/Footer';
 import Header from 'app/Header';
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <div className='flex min-h-screen flex-col justify-between'>
           <Container>
             {/* Todo: Add header */}
+            <NextTopLoader shadow={false} showSpinner={false} />
             <Header />
             {children}
           </Container>
