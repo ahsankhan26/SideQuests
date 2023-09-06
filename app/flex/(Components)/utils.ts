@@ -1,3 +1,5 @@
+import htmlFormatter from 'pretty';
+
 export enum WIDTH {
   AUTO = 'w-3',
   FIXED = 'w-32',
@@ -32,6 +34,15 @@ export interface IConfiguration {
   justifyContent: JUSTIFY_CONTENT;
 }
 
+export const initialConfiguration = {
+  itemCount: 5,
+  gap: 2,
+  wrap: WRAP.WRAP,
+  width: WIDTH.FIXED,
+  direction: DIRECTION.ROW,
+  justifyContent: JUSTIFY_CONTENT.START,
+};
+
 export const getFlexGap = (gap: number) => {
   return {
     'gap-0': gap === 0,
@@ -41,4 +52,18 @@ export const getFlexGap = (gap: number) => {
     'gap-4': gap === 4,
     'gap-5': gap === 5,
   };
+};
+
+export const prettifiedHtmlString = (html: string) => {
+  // remove redundant classes
+  let filtered = html.replaceAll('animate-fade', '');
+  filtered = filtered.replaceAll('animate-once', '');
+  filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
+  filtered = filtered.replaceAll('id="flex"', '');
+  filtered = filtered.replaceAll('font-semibold', '');
+  filtered = filtered.replaceAll('transition-all', '');
+  filtered = filtered.replaceAll('duration-500', '');
+  filtered = filtered.replaceAll('ease-in-out', '');
+  filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
+  return htmlFormatter(filtered);
 };
