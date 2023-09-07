@@ -7,15 +7,15 @@ import { MenuTitle, Radio } from 'app/flex/(Components)/Common';
 import {
   alignItemsButtons,
   directionButtons,
+  gapButtons,
   IConfiguration,
   initialConfiguration,
   justifyContentButtons,
   widthButtons,
   wrapButtons,
 } from 'app/flex/(Components)/constants';
-import { getFlexGap, prettifiedHtmlString } from 'app/flex/(Components)/utils';
+import { prettifiedHtmlString } from 'app/flex/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
-import classNames from 'classnames';
 
 import { Button } from '@/components';
 import { copyToClipboard } from '@/utils/common';
@@ -57,7 +57,7 @@ const Flexbox: React.FC = () => {
   return (
     <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
       {/* LEFT */}
-      <div className='button-shadow flex flex-col gap-5 bg-stone-200 p-5 md:col-span-3'>
+      <div className='button-shadow flex flex-col gap-4 bg-stone-200 p-5 md:col-span-3'>
         {/* Count */}
         <RangeInput
           aria-label='Count'
@@ -68,24 +68,27 @@ const Flexbox: React.FC = () => {
           }
           range={[1, 15]}
           title='Count'
-          titleClassName='bg-[#ff91e7]'
+          titleClassName='bg-[#ff91e7] !text-sm'
           value={configuration.itemCount}
         />
         {/* Gap */}
-        <RangeInput
-          aria-label='Gap'
-          disabled={showCode}
-          fullWidth
-          max={'5'}
-          min={'0'}
-          onChange={(e) =>
-            handleConfigurationChange({ gap: Number(e.target.value) })
-          }
-          title='Gap'
-          titleClassName='bg-[#91a8ed]'
-          value={configuration.gap}
-          values={[0, 1, 2, 3, 4, 5]}
-        />
+        <div>
+          <MenuTitle>Gap</MenuTitle>
+          <div className='flex items-center gap-2'>
+            {gapButtons.map(({ name, value }) => (
+              <Radio
+                checked={configuration.gap === value}
+                disabled={showCode}
+                key={name}
+                label={name}
+                name={name}
+                onChange={() => handleConfigurationChange({ gap: value })}
+                value={value}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Width */}
         <div>
           <MenuTitle>Width</MenuTitle>
@@ -93,6 +96,7 @@ const Flexbox: React.FC = () => {
             {widthButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.width === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 name={name}
@@ -110,6 +114,7 @@ const Flexbox: React.FC = () => {
             {wrapButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.wrap === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() => handleConfigurationChange({ wrap: value })}
@@ -126,6 +131,7 @@ const Flexbox: React.FC = () => {
             {directionButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.direction === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() => handleConfigurationChange({ direction: value })}
@@ -142,6 +148,7 @@ const Flexbox: React.FC = () => {
             {justifyContentButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.justifyContent === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() =>
@@ -160,6 +167,7 @@ const Flexbox: React.FC = () => {
             {alignItemsButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.alignItems === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 name={`items_${name}`}
@@ -189,21 +197,16 @@ const Flexbox: React.FC = () => {
         </label>
       </div>
       {/* RIGHT */}
-      <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
+      <div className='button-shadow max-h-[43rem] overflow-scroll bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
           <div
-            className={classNames(
-              `flex transition-all duration-500 ease-in-out ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems}`,
-              getFlexGap(configuration.gap),
-            )}
+            className={`flex transition-all duration-500 ease-in-out ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems} ${configuration.gap}`}
             id='flex'
           >
             {items.map((item) => {
               return (
                 <div
-                  className={classNames(
-                    `flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold transition-all duration-500 ease-in-out animate-once hover:bg-fuchsia-800 ${configuration.width}`,
-                  )}
+                  className={`flex h-32 min-w-fit animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold transition-all duration-500 ease-in-out animate-once hover:bg-fuchsia-800 ${configuration.width}`}
                   key={item}
                 >
                   {item}
@@ -214,7 +217,7 @@ const Flexbox: React.FC = () => {
         ) : (
           <div className='relative h-full animate-fade animate-once'>
             <div
-              className='tooltip-primary tooltip absolute right-2 top-2'
+              className='tooltip-primary tooltip tooltip-left absolute right-2 top-2'
               data-tip='Copy to clipboard'
             >
               <Button
