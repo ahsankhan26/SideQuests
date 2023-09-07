@@ -1,3 +1,9 @@
+export enum GAP {
+  ZERO = 'gap-0',
+  ONE = 'gap-1',
+  TWO = 'gap-2',
+  THREE = 'gap-3',
+}
 export enum WIDTH {
   AUTO = 'w-3',
   FIXED = 'w-32',
@@ -32,7 +38,7 @@ export enum ALIGN_ITEMS {
 
 export interface IConfiguration {
   itemCount: number;
-  gap: number;
+  gap: GAP;
   wrap: WRAP;
   width: WIDTH;
   direction: DIRECTION;
@@ -42,7 +48,7 @@ export interface IConfiguration {
 
 export const initialConfiguration: IConfiguration = {
   itemCount: 5,
-  gap: 2,
+  gap: GAP.TWO,
   wrap: WRAP.WRAP,
   width: WIDTH.FIXED,
   direction: DIRECTION.ROW,
@@ -50,6 +56,12 @@ export const initialConfiguration: IConfiguration = {
   alignItems: ALIGN_ITEMS.START,
 };
 
+export const gapButtons = [
+  { name: '0', value: GAP.ZERO },
+  { name: '0.25', value: GAP.ONE },
+  { name: '0.5', value: GAP.TWO },
+  { name: '0.75', value: GAP.THREE },
+];
 export const widthButtons = [
   { name: 'Auto', value: WIDTH.AUTO },
   { name: 'Fixed', value: WIDTH.FIXED },
