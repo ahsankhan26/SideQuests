@@ -93,6 +93,7 @@ const Flexbox: React.FC = () => {
             {widthButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.width === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 name={name}
@@ -110,6 +111,7 @@ const Flexbox: React.FC = () => {
             {wrapButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.wrap === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() => handleConfigurationChange({ wrap: value })}
@@ -126,6 +128,7 @@ const Flexbox: React.FC = () => {
             {directionButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.direction === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() => handleConfigurationChange({ direction: value })}
@@ -142,6 +145,7 @@ const Flexbox: React.FC = () => {
             {justifyContentButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.justifyContent === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 onChange={() =>
@@ -160,6 +164,7 @@ const Flexbox: React.FC = () => {
             {alignItemsButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.alignItems === value}
+                disabled={showCode}
                 key={name}
                 label={name}
                 name={`items_${name}`}
@@ -189,7 +194,7 @@ const Flexbox: React.FC = () => {
         </label>
       </div>
       {/* RIGHT */}
-      <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
+      <div className='button-shadow max-h-[53rem] overflow-scroll bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
           <div
             className={classNames(
@@ -202,7 +207,7 @@ const Flexbox: React.FC = () => {
               return (
                 <div
                   className={classNames(
-                    `flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold transition-all duration-500 ease-in-out animate-once hover:bg-fuchsia-800 ${configuration.width}`,
+                    `flex h-32 min-w-fit animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold transition-all duration-500 ease-in-out animate-once hover:bg-fuchsia-800 ${configuration.width}`,
                   )}
                   key={item}
                 >
