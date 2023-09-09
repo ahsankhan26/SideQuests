@@ -16,6 +16,7 @@ import {
 } from 'app/flex/(Components)/constants';
 import { prettifiedHtmlString } from 'app/flex/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 
 import { Button } from '@/components';
 import { copyToClipboard } from '@/utils/common';
@@ -199,21 +200,25 @@ const Flexbox: React.FC = () => {
       {/* RIGHT */}
       <div className='button-shadow max-h-[43rem] overflow-scroll bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
-          <div
-            className={`flex transition-all duration-500 ease-in-out ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems} ${configuration.gap}`}
+          <motion.div
+            className={`flex ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems} ${configuration.gap}`}
             id='flex'
+            layout
           >
-            {items.map((item) => {
-              return (
-                <div
-                  className={`flex h-32 min-w-fit animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold transition-all duration-500 ease-in-out animate-once hover:bg-fuchsia-800 ${configuration.width}`}
-                  key={item}
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
+            <AnimateSharedLayout>
+              {items.map((item) => {
+                return (
+                  <motion.div
+                    className={`flex h-32 min-w-fit animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800 ${configuration.width}`}
+                    key={item}
+                    layout
+                  >
+                    {item}
+                  </motion.div>
+                );
+              })}
+            </AnimateSharedLayout>
+          </motion.div>
         ) : (
           <div className='relative h-full animate-fade animate-once'>
             <div

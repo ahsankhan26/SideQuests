@@ -18,9 +18,6 @@ export const prettifiedHtmlString = (html: string) => {
   filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
   filtered = filtered.replaceAll('id="flex"', '');
   filtered = filtered.replaceAll('font-semibold', '');
-  filtered = filtered.replaceAll('transition-all', '');
-  filtered = filtered.replaceAll('duration-500', '');
-  filtered = filtered.replaceAll('ease-in-out', '');
   filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
   return htmlFormatter(filtered);
 };

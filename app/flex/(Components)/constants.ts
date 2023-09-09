@@ -80,14 +80,14 @@ export const directionButtons = [
 ];
 export const justifyContentButtons = [
   { name: 'flex-start', value: JUSTIFY_CONTENT.START },
+  { name: 'center', value: JUSTIFY_CONTENT.CENTER },
   { name: 'flex-end', value: JUSTIFY_CONTENT.END },
   { name: 'space-between', value: JUSTIFY_CONTENT.BETWEEN },
-  { name: 'center', value: JUSTIFY_CONTENT.CENTER },
   { name: 'space-around', value: JUSTIFY_CONTENT.AROUND },
   { name: 'space-evenly', value: JUSTIFY_CONTENT.EVENLY },
 ];
 export const alignItemsButtons = [
   { name: 'start', value: ALIGN_ITEMS.START },
-  { name: 'end', value: ALIGN_ITEMS.END },
   { name: 'center', value: ALIGN_ITEMS.CENTER },
+  { name: 'end', value: ALIGN_ITEMS.END },
 ];

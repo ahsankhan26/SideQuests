@@ -17,6 +17,7 @@ import {
 } from 'app/grid/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 import classNames from 'classnames';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 
 import { Button } from '@/components';
 import { copyToClipboard } from '@/utils/common';
@@ -224,33 +225,37 @@ const Grid: React.FC = () => {
       {/* RIGHT */}
       <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
-          <div
+          <motion.div
             className={classNames(
               'grid',
               getGridCols(configuration.columns),
               getGridGap(configuration.gap),
             )}
             id='grid'
+            layout
           >
-            {items.map((item, idx) => {
-              const colSpan = advanceConfiguration[idx]?.colSpan;
-              const colStart = advanceConfiguration[idx]?.colStart;
-              const colEnd = advanceConfiguration[idx]?.colEnd;
-              return (
-                <div
-                  className={classNames(
-                    'flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800',
-                    getColSpan(colSpan),
-                    getColStart(colStart),
-                    getColEnd(colEnd),
-                  )}
-                  key={item}
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
+            <AnimateSharedLayout>
+              {items.map((item, idx) => {
+                const colSpan = advanceConfiguration[idx]?.colSpan;
+                const colStart = advanceConfiguration[idx]?.colStart;
+                const colEnd = advanceConfiguration[idx]?.colEnd;
+                return (
+                  <motion.div
+                    className={classNames(
+                      'flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800',
+                      getColSpan(colSpan),
+                      getColStart(colStart),
+                      getColEnd(colEnd),
+                    )}
+                    key={item}
+                    layout
+                  >
+                    {item}
+                  </motion.div>
+                );
+              })}
+            </AnimateSharedLayout>
+          </motion.div>
         ) : (
           <div className='relative h-full animate-fade animate-once'>
             <div
