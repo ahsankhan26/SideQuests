@@ -223,7 +223,7 @@ const Flexbox: React.FC = () => {
               {items.map((item) => {
                 return (
                   <motion.div
-                    className={`flex h-32 min-w-fit animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800 ${configuration.width}`}
+                    className={`flex h-32 min-w-fit items-center justify-center bg-fuchsia-700 text-2xl font-semibold hover:bg-fuchsia-800 ${configuration.width}`}
                     key={item}
                     layout
                   >
@@ -234,7 +234,7 @@ const Flexbox: React.FC = () => {
             </AnimateSharedLayout>
           </motion.div>
         ) : (
-          <div className='relative h-full animate-fade animate-once'>
+          <div className='relative h-full'>
             <div
               className='tooltip-primary tooltip tooltip-left absolute right-2 top-2'
               data-tip='Copy to clipboard'

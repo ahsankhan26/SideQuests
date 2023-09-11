@@ -13,9 +13,7 @@ export const getFlexGap = (gap: number) => {
 
 export const prettifiedHtmlString = (html: string) => {
   // remove redundant classes
-  let filtered = html.replaceAll('animate-fade', '');
-  filtered = filtered.replaceAll('animate-once', '');
-  filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
+  let filtered = html.replaceAll('hover:bg-fuchsia-800', '');
   filtered = filtered.replaceAll('id="flex"', '');
   filtered = filtered.replaceAll('font-semibold', '');
   filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes

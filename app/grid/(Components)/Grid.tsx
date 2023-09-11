@@ -242,7 +242,7 @@ const Grid: React.FC = () => {
                 return (
                   <motion.div
                     className={classNames(
-                      'flex h-32 animate-fade items-center justify-center bg-fuchsia-700 text-2xl font-semibold animate-once hover:bg-fuchsia-800',
+                      'flex h-32 items-center justify-center bg-fuchsia-700 text-2xl font-semibold hover:bg-fuchsia-800',
                       getColSpan(colSpan),
                       getColStart(colStart),
                       getColEnd(colEnd),
@@ -257,7 +257,7 @@ const Grid: React.FC = () => {
             </AnimateSharedLayout>
           </motion.div>
         ) : (
-          <div className='relative h-full animate-fade animate-once'>
+          <div className='relative h-full'>
             <div
               className='tooltip-primary tooltip absolute right-2 top-2'
               data-tip='Copy to clipboard'

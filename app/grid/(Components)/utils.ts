@@ -93,9 +93,7 @@ export const getColEnd = (colEnd: number | 'auto' | undefined) => {
 
 export const prettifiedHtmlString = (html: string) => {
   // remove redundant classes
-  let filtered = html.replaceAll('animate-fade', '');
-  filtered = filtered.replaceAll('animate-once', '');
-  filtered = filtered.replaceAll('hover:bg-fuchsia-800', '');
+  let filtered = html.replaceAll('hover:bg-fuchsia-800', '');
   filtered = filtered.replaceAll('id="grid"', '');
   filtered = filtered.replaceAll('font-semibold', '');
   filtered = filtered.replaceAll('col-start-auto', '');
