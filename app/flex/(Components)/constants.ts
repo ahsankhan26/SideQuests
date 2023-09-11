@@ -76,7 +76,7 @@ export const directionButtons = [
   { name: 'row', value: DIRECTION.ROW },
   { name: 'row-reverse', value: DIRECTION.ROW_REVERSE },
   { name: 'column', value: DIRECTION.COLUMN },
-  { name: 'column-reversed', value: DIRECTION.COLUMN_REVERSE },
+  { name: 'column-reverse', value: DIRECTION.COLUMN_REVERSE },
 ];
 export const justifyContentButtons = [
   { name: 'flex-start', value: JUSTIFY_CONTENT.START },

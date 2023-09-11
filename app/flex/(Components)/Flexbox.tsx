@@ -3,9 +3,11 @@
 import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
+import { HiQuestionMarkCircle } from 'react-icons/hi';
 import { MenuTitle, Radio } from 'app/flex/(Components)/Common';
 import {
   alignItemsButtons,
+  DIRECTION,
   directionButtons,
   gapButtons,
   IConfiguration,
@@ -144,12 +146,24 @@ const Flexbox: React.FC = () => {
 
         {/* Justify Content */}
         <div>
-          <MenuTitle>Justify Content</MenuTitle>
+          <div className='flex items-center gap-1'>
+            <MenuTitle>Justify Content</MenuTitle>
+            <div
+              className='tooltip'
+              data-tip='works when flex direction is row or row-reverse'
+            >
+              <HiQuestionMarkCircle className='text-slate-700' size={18} />
+            </div>
+          </div>
           <div className='flex flex-wrap items-center gap-2'>
             {justifyContentButtons.map(({ name, value }) => (
               <Radio
                 checked={configuration.justifyContent === value}
-                disabled={showCode}
+                disabled={
+                  showCode ||
+                  configuration.direction === DIRECTION.COLUMN ||
+                  configuration.direction === DIRECTION.COLUMN_REVERSE
+                }
                 key={name}
                 label={name}
                 onChange={() =>
