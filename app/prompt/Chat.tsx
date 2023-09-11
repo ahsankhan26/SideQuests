@@ -7,10 +7,10 @@ import {
   generateMessage,
   getRandomBetweenRange,
   LETTER_RANGE,
-  scrolltoBottom,
+  scrollToBottom,
 } from 'app/prompt/utils';
 
-import Input from '@/components/Input';
+import { Input } from '@/components';
 
 interface IForm {
   message: string;
@@ -27,7 +27,7 @@ const Chat: React.FC = () => {
   const [visibleText, setVisibleText] = useState('');
 
   const showPrompt = ({ messagesArr }: { messagesArr: string[] }) => {
-    scrolltoBottom('#chat-container');
+    scrollToBottom('#chat-container');
     return new Promise<void>((resolve) => {
       const message = generateMessage();
       const interval = setInterval(() => {
