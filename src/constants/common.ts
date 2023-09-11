@@ -19,4 +19,8 @@ export const homeCards = [
     name: 'Flexbox Visualisation',
     link: '/flex',
   },
+  {
+    name: 'Text Repeat',
+    link: '/loop',
+  },
 ];

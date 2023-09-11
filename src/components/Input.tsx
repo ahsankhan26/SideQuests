@@ -7,7 +7,7 @@ interface IInput extends React.ComponentProps<'input'> {
   iconDisabled?: boolean;
 }
 
-const Input: React.FC<IInput> = ({
+export const Input: React.FC<IInput> = ({
   type = 'text',
   className = '',
   icon,
@@ -45,5 +45,3 @@ const Input: React.FC<IInput> = ({
     ) : null}
   </div>
 );
-
-export default Input;

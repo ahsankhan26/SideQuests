@@ -40,7 +40,7 @@ export const generateMessage = () => {
   return message.join(' ');
 };
 
-export const scrolltoBottom = (id: string) => {
+export const scrollToBottom = (id: string) => {
   if (typeof document !== 'undefined') {
     const element = document.querySelector(id);
     if (element?.scrollTop) {
