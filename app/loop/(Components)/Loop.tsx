@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FiClipboard } from 'react-icons/fi';
 
 import { Button, Input } from '@/components';
-import { copyToClipboard } from '@/utils/common';
+import { copyToClipboard } from '@/utils';
 
 interface ILoopForm {
   text: string;

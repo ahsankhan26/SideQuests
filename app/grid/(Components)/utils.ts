@@ -1,5 +1,7 @@
 import htmlFormatter from 'pretty';
 
+import { removeFramerAttributes } from '@/utils';
+
 export interface IConfiguration {
   itemCount: number;
   columns: number;
@@ -100,5 +102,7 @@ export const prettifiedHtmlString = (html: string) => {
   filtered = filtered.replaceAll('col-span-auto', '');
   filtered = filtered.replaceAll('col-end-auto', '');
   filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
+  filtered = removeFramerAttributes(filtered); // remove framer-motion attributes
+
   return htmlFormatter(filtered);
 };
