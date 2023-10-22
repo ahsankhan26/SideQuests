@@ -1,5 +1,7 @@
 import htmlFormatter from 'pretty';
 
+import { removeFramerAttributes } from '@/utils';
+
 export const getFlexGap = (gap: number) => {
   return {
     'gap-0': gap === 0,
@@ -17,5 +19,7 @@ export const prettifiedHtmlString = (html: string) => {
   filtered = filtered.replaceAll('id="flex"', '');
   filtered = filtered.replaceAll('font-semibold', '');
   filtered = filtered.replace(/\s{2,}/g, ' '); // remove double whitespace caused by removing classes
+  filtered = removeFramerAttributes(filtered); // remove framer-motion attributes
+
   return htmlFormatter(filtered);
 };

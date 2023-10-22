@@ -17,10 +17,10 @@ import {
 } from 'app/grid/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 import classNames from 'classnames';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 
 import { Button } from '@/components';
-import { copyToClipboard } from '@/utils/common';
+import { copyToClipboard } from '@/utils';
 
 const Grid: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
@@ -234,7 +234,7 @@ const Grid: React.FC = () => {
             id='grid'
             layout
           >
-            <AnimateSharedLayout>
+            <LayoutGroup>
               {items.map((item, idx) => {
                 const colSpan = advanceConfiguration[idx]?.colSpan;
                 const colStart = advanceConfiguration[idx]?.colStart;
@@ -254,7 +254,7 @@ const Grid: React.FC = () => {
                   </motion.div>
                 );
               })}
-            </AnimateSharedLayout>
+            </LayoutGroup>
           </motion.div>
         ) : (
           <div className='relative h-full'>

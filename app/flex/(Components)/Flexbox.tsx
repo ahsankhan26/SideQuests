@@ -18,10 +18,10 @@ import {
 } from 'app/flex/(Components)/constants';
 import { prettifiedHtmlString } from 'app/flex/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
-import { AnimateSharedLayout, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 
 import { Button } from '@/components';
-import { copyToClipboard } from '@/utils/common';
+import { copyToClipboard } from '@/utils';
 
 const Flexbox: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
@@ -219,7 +219,7 @@ const Flexbox: React.FC = () => {
             id='flex'
             layout
           >
-            <AnimateSharedLayout>
+            <LayoutGroup>
               {items.map((item) => {
                 return (
                   <motion.div
@@ -231,7 +231,7 @@ const Flexbox: React.FC = () => {
                   </motion.div>
                 );
               })}
-            </AnimateSharedLayout>
+            </LayoutGroup>
           </motion.div>
         ) : (
           <div className='relative h-full'>
