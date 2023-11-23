@@ -79,9 +79,13 @@ const CountryCapitalGame: React.FC = () => {
           </Button>
         </div>
       ) : null}
-      <div className='flex-between my-5 gap-10 text-lg'>
+      <div className='flex-between my-5 gap-10 text-2xl'>
         <div>
-          Score: <strong>{score}</strong>
+          Score:{' '}
+          <strong className='countdown'>
+            {/* @ts-expect-error countdown type issue */}
+            <span style={{ '--value': score }}></span>
+          </strong>
         </div>
         <div>
           <label className='label cursor-pointer gap-2'>
