@@ -23,4 +23,8 @@ export const homeCards = [
     name: 'Text Repeat',
     link: '/loop',
   },
+  {
+    name: 'Capital Guess Game',
+    link: '/capital',
+  },
 ];
