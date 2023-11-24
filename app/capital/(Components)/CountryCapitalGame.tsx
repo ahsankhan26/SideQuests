@@ -1,11 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { easy, hard } from 'app/capital/(Components)/constants';
+import {
+  easy,
+  getRandomSubObject,
+  hard,
+} from 'app/capital/(Components)/constants';
 import classNames from 'classnames';
 
 import { Button } from '@/components';
 import { shuffleArray } from '@/utils';
+
+enum DIFFICULTY {
+  EASY = 20,
+  HARD = 40,
+}
 
 const CountryCapitalGame: React.FC = () => {
   const [data, setData] = useState<{ [key: string]: string } | null>(null);
@@ -14,32 +23,34 @@ const CountryCapitalGame: React.FC = () => {
   const [isWrong, setIsWrong] = useState(false);
   const [score, setScore] = useState(0);
 
-  const resetGame = (value?: { [key: string]: string }) => {
-    const info = value ?? data;
-    if (info) {
-      setIsWrong(false);
-      setCurrentSelected([]);
-      setScore(0);
-      const arr: string[] = [];
-      Object.keys(info).forEach((key) => {
-        arr.push(key);
-        // @ts-expect-error weird error
-        arr.push(info[key]);
-      });
+  const resetGame = (isHard?: boolean) => {
+    const infoData = isHard ? hard : easy;
+    // get random values;
+    const info = getRandomSubObject(infoData, DIFFICULTY.EASY);
+    setIsWrong(false);
+    setCurrentSelected([]);
+    setScore(0);
+    const arr: string[] = [];
+    Object.keys(info).forEach((key) => {
+      arr.push(key);
+      // @ts-expect-error weird error
+      arr.push(info[key]);
+    });
 
-      const shuffledArr = shuffleArray(arr);
-      setGameData(shuffledArr);
-    }
+    const shuffledArr = shuffleArray(
+      arr.slice(0, isHard ? DIFFICULTY.HARD : DIFFICULTY.EASY),
+    );
+    setGameData(shuffledArr);
   };
 
   const changeDifficulty = (isHard: boolean) => {
     setData(isHard ? hard : easy);
-    resetGame(isHard ? hard : easy);
+    resetGame(isHard);
   };
 
   useEffect(() => {
     setData(easy);
-    resetGame(easy);
+    resetGame();
   }, []);
 
   useEffect(() => {
@@ -73,7 +84,12 @@ const CountryCapitalGame: React.FC = () => {
           <div>Game Over</div>
           <Button
             className='btn-secondary btn-lg px-20'
-            onClick={() => resetGame()}
+            onClick={() => {
+              const isHard = (
+                document.querySelector('#difficulty') as HTMLInputElement
+              ).checked;
+              resetGame(isHard);
+            }}
           >
             Reset
           </Button>
@@ -92,6 +108,7 @@ const CountryCapitalGame: React.FC = () => {
             <span className='label-text'>Easy</span>
             <input
               className='toggle toggle-lg'
+              id='difficulty'
               onClick={(e) =>
                 changeDifficulty((e.target as HTMLInputElement).checked)
               }
@@ -102,7 +119,7 @@ const CountryCapitalGame: React.FC = () => {
         </div>
       </div>
       <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
-        {gameData?.map((item, idx) => (
+        {gameData?.map((item) => (
           <Button
             className={classNames('btn-lg h-40', {
               'btn-primary pointer-events-none border-4 border-info':
@@ -111,7 +128,7 @@ const CountryCapitalGame: React.FC = () => {
                 currentSelected?.includes(item) && isWrong,
               'btn-neutral': !currentSelected?.includes(item),
             })}
-            key={`${item}_${idx}`}
+            key={item}
             onClick={() => {
               setCurrentSelected((prev) => {
                 if (isWrong) {
