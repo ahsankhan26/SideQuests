@@ -22,6 +22,8 @@ const CountryCapitalGame: React.FC = () => {
   const [currentSelected, setCurrentSelected] = useState<string[]>([]);
   const [isWrong, setIsWrong] = useState(false);
   const [score, setScore] = useState(0);
+  const [correctScore, setCorrectScore] = useState(0);
+  const [percentScore, setPercentScore] = useState(0);
 
   const resetGame = (isHard?: boolean) => {
     const infoData = isHard ? hard : easy;
@@ -30,6 +32,8 @@ const CountryCapitalGame: React.FC = () => {
     setIsWrong(false);
     setCurrentSelected([]);
     setScore(0);
+    setCorrectScore(0);
+    setPercentScore(0);
     const arr: string[] = [];
     Object.keys(info).forEach((key) => {
       arr.push(key);
@@ -65,17 +69,28 @@ const CountryCapitalGame: React.FC = () => {
         // check other value
         const otherValue = currentSelected.filter((item) => item !== key);
         if (data && data[key] === otherValue[0]) {
+          // Correct
           const filtered = gameData.filter(
             (item) => item !== key && item !== otherValue[0],
           );
+          setCorrectScore(correctScore + 1);
           setGameData(filtered);
           setCurrentSelected([]);
         } else {
+          // Wrong
           setIsWrong(true);
         }
       }
     }
   }, [currentSelected]);
+
+  useEffect(() => {
+    if (score > 0 && score % 2 === 0) {
+      const percent = Math.round((correctScore / (score / 2)) * 100);
+      const final = Math.min(100, percent); // Ensure percentScore is not greater than 100%)
+      setPercentScore(final > 0 ? final : 0);
+    }
+  }, [score, correctScore]);
 
   return (
     <div>
@@ -100,7 +115,7 @@ const CountryCapitalGame: React.FC = () => {
           Score:{' '}
           <strong className='countdown'>
             {/* @ts-expect-error countdown type issue */}
-            <span style={{ '--value': score }}></span>
+            <span style={{ '--value': percentScore }} />
           </strong>
         </div>
         <div>
