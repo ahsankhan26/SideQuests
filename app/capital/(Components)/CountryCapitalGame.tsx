@@ -113,7 +113,7 @@ const CountryCapitalGame: React.FC = () => {
       <div className='flex-between my-5 gap-10 text-2xl'>
         <div className='flex flex-col items-center gap-1 md:flex-row'>
           <div>
-            Score:{' '}
+            Accuracy:{' '}
             <strong className='countdown'>
               {/* @ts-expect-error countdown type issue */}
               <span style={{ '--value': percentScore }} />
