@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang={AppConfig.locale}>
       <body className={`${raleway.variable} font-sans`}>
-        <div className='flex min-h-screen flex-col justify-between'>
+        <div className='min-h-screen justify-between flex-column'>
           <Container>
             {/* Todo: Add header */}
             <NextTopLoader shadow={false} showSpinner={false} />

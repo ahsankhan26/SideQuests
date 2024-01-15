@@ -9198,6 +9198,11 @@ synckit@^0.8.4:
     "@pkgr/utils" "^2.3.1"
     tslib "^2.5.0"
 
+tailwind-class-extend@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tailwind-class-extend/-/tailwind-class-extend-1.0.1.tgz#070e12b459452786456259777ba24736664cc2b8"
+  integrity sha512-WSYmTlPQUtUfWoBA3g33uO2l2bwi0CxG79owsILtxXAb39h3GGOkW4IS/hvQaRPg3CX8W72Etlskc+5v3VSw8A==
+
 tailwindcss@^3:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.3.3.tgz#90da807393a2859189e48e9e7000e6880a736daf"

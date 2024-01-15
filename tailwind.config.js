@@ -5,6 +5,7 @@ const plugin = require('tailwindcss/plugin');
 module.exports = {
   plugins: [
     require('daisyui'),
+    require('tailwind-class-extend'),
     plugin(function ({ addBase }) {
       addBase({
         html: { fontSize: '16px' },

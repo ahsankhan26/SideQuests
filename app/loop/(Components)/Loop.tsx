@@ -25,7 +25,7 @@ const Loop: React.FC = () => {
   };
 
   return (
-    <div className='flex-center flex-col gap-2'>
+    <div className='flex-col gap-2 flex-center'>
       <form className='contents' onSubmit={handleSubmit(submit)}>
         <Controller
           control={control}
@@ -67,7 +67,7 @@ const Loop: React.FC = () => {
             },
           }}
         />
-        <div className='flex-center gap-2'>
+        <div className='gap-2 flex-center'>
           <Controller
             control={control}
             name='repeat'

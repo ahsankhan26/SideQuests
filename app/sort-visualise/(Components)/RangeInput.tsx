@@ -37,7 +37,7 @@ const RangeInput: React.FC<IRangeInput> = ({
         { 'lg:w-60': !fullWidth },
       )}
     >
-      <div className='flex flex-col gap-2'>
+      <div className='gap-2 flex-column'>
         <div
           className={`border-text border-b-4 border-[#1E1E1E] text-center text-lg font-semibold uppercase ${
             titleClassName || 'bg-[#97E36A]'

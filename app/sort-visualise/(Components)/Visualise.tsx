@@ -62,8 +62,8 @@ const Visualiser: React.FC = () => {
   return (
     <>
       {/* Form */}
-      <div className='flex-between mt-3 flex-col gap-4 lg:flex-row'>
-        <div className='flex w-full flex-col items-center gap-4 md:flex-row'>
+      <div className='mt-3 flex-col gap-4 flex-between lg:flex-row'>
+        <div className='w-full items-center gap-4 flex-column md:flex-row'>
           <RangeInput
             aria-label='Values'
             defaultValue={3}
@@ -90,7 +90,7 @@ const Visualiser: React.FC = () => {
             values={['1x', '2x', '🚀']}
           />
         </div>
-        <div className='flex h-full w-full gap-4 lg:w-auto'>
+        <div className='flex gap-4 wh-full lg:w-auto'>
           <SortButton
             onClick={() => {
               if (inProgress) {
@@ -110,7 +110,7 @@ const Visualiser: React.FC = () => {
       </div>
       {/* Preview */}
       <div className='card-shadow border-text my-5 h-96 rounded border-4 bg-accent'>
-        <div className='flex h-full flex-col'>
+        <div className='h-full flex-column'>
           <div className='border-text border-b-4 bg-white py-3 text-center text-lg' />
           <div className='flex h-full' style={{ transform: 'rotateX(180deg)' }}>
             {arr.map((item, idx) => (

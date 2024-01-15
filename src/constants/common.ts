@@ -27,4 +27,8 @@ export const homeCards = [
     name: 'Capital Guess Game',
     link: '/capital',
   },
+  {
+    name: 'tailwind-class-extend (npm)',
+    link: 'https://www.npmjs.com/package/tailwind-class-extend',
+  },
 ];

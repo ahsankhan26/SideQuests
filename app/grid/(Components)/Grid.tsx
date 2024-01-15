@@ -80,7 +80,7 @@ const Grid: React.FC = () => {
   return (
     <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
       {/* LEFT */}
-      <div className='button-shadow flex flex-col gap-5 bg-stone-200 p-5 md:col-span-3'>
+      <div className='button-shadow gap-5 bg-stone-200 p-5 flex-column md:col-span-3'>
         <RangeInput
           aria-label='Count'
           disabled={showCode}
@@ -125,7 +125,7 @@ const Grid: React.FC = () => {
           <div className='collapse-title text-xl font-medium'>
             Advance Settings
           </div>
-          <div className='collapse-content flex flex-col gap-2'>
+          <div className='collapse-content gap-2 flex-column'>
             {/* Column Span */}
             <div className='collapse'>
               <input type='checkbox' />

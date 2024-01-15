@@ -15,7 +15,7 @@ export const SelectInput: React.FC<ISelectInput> = ({
 }) => (
   <>
     {items.map((item) => (
-      <div className='flex-center gap-2 text-xs font-semibold' key={item}>
+      <div className='gap-2 text-xs font-semibold flex-center' key={item}>
         <p>{item}</p>
         <select
           className='select-bordered select w-full bg-white'
