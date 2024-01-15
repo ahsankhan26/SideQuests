@@ -62,13 +62,13 @@ const Chat: React.FC = () => {
   const bottomEl = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className='flex-center flex-col'>
+    <div className='flex-col flex-center'>
       <div
         className='my-10 flex h-72 w-full flex-col-reverse justify-between overflow-y-scroll rounded-lg bg-base-200 p-10'
         id='chat-container'
         ref={bottomEl}
       >
-        <div className='my-10 flex flex-col gap-4 '>
+        <div className='my-10 gap-4 flex-column '>
           {messages?.map((message, idx) => (
             <div
               className='even:text-primary-content'

@@ -95,7 +95,7 @@ const CountryCapitalGame: React.FC = () => {
   return (
     <div>
       {gameData.length === 0 && score > 0 ? (
-        <div className='flex-center my-20 flex-col gap-5 text-4xl font-bold'>
+        <div className='my-20 flex-col gap-5 text-4xl font-bold flex-center'>
           <div>Game Over</div>
           <Button
             className='btn-secondary btn-lg px-20'
@@ -110,8 +110,8 @@ const CountryCapitalGame: React.FC = () => {
           </Button>
         </div>
       ) : null}
-      <div className='flex-between my-5 gap-10 text-2xl'>
-        <div className='flex flex-col items-center gap-1 md:flex-row'>
+      <div className='my-5 gap-10 text-2xl flex-between'>
+        <div className='items-center gap-1 flex-column md:flex-row'>
           <div>
             Accuracy:{' '}
             <strong className='countdown'>

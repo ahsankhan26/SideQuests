@@ -8,7 +8,7 @@ export const MenuTitle: React.FC<{ children: React.ReactNode }> = ({
 
 export const Radio: React.FC<IRadio> = ({ name, label, ...rest }) => (
   <div className='form-control'>
-    <label className='flex-center cursor-pointer gap-2 text-sm'>
+    <label className='cursor-pointer gap-2 text-sm flex-center'>
       <input
         className='radio radio-xs border-2 border-black'
         name={name ?? label}

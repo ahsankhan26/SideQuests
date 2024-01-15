@@ -60,7 +60,7 @@ const Flexbox: React.FC = () => {
   return (
     <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
       {/* LEFT */}
-      <div className='button-shadow flex flex-col gap-4 bg-stone-200 p-5 md:col-span-3'>
+      <div className='button-shadow gap-4 bg-stone-200 p-5 flex-column md:col-span-3'>
         {/* Count */}
         <RangeInput
           aria-label='Count'

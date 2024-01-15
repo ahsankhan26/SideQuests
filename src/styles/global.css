@@ -18,12 +18,6 @@
     -webkit-box-shadow: 5px 5px 0px 0px #1e1e1e;
     -moz-box-shadow: 5px 5px 0px 0px #1e1e1e;
   }
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-  .flex-between {
-    @apply flex items-center justify-between;
-  }
   /* 
   for pre tag added by `react-highlight` package, 
   can't access pre tag from props.
