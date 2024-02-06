@@ -35,8 +35,8 @@
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.rootFontSize": 16, // Update this according to your project's base-fontsize Or remove if you didn't define custom base-fontsize - Default is 16
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "prettier.ignorePath": ".gitignore",
   "jest.autoRun": {

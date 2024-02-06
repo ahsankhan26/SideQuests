@@ -92,6 +92,7 @@ const Visualiser: React.FC = () => {
         </div>
         <div className='flex gap-4 wh-full lg:w-auto'>
           <SortButton
+            aria-label='shuffle'
             onClick={() => {
               if (inProgress) {
                 stopSort.current = true;
@@ -103,7 +104,12 @@ const Visualiser: React.FC = () => {
             {inProgress ? <FiX /> : <FiRotateCw />}
           </SortButton>
 
-          <SortButton className='w-full' disabled={inProgress} onClick={sort}>
+          <SortButton
+            aria-label='sort'
+            className='w-full'
+            disabled={inProgress}
+            onClick={sort}
+          >
             Sort
           </SortButton>
         </div>
