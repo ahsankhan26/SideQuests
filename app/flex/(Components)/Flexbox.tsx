@@ -60,7 +60,7 @@ const Flexbox: React.FC = () => {
   return (
     <div className='grid min-h-[36rem] w-full grid-cols-1 gap-5 rounded-md text-black md:grid-cols-7 lg:grid-cols-8'>
       {/* LEFT */}
-      <div className='button-shadow gap-4 bg-stone-200 p-5 flex-column md:col-span-3'>
+      <div className='button-shadow gap-4 bg-white p-5 flex-column md:col-span-3'>
         {/* Count */}
         <RangeInput
           aria-label='Count'
@@ -197,7 +197,7 @@ const Flexbox: React.FC = () => {
 
         {/* Reset Button */}
         <Button
-          className='button-shadow btn-accent btn-outline rounded-none'
+          className='button-shadow btn-accent rounded-none'
           disabled={showCode}
           onClick={() => setConfiguration(initialConfiguration)}
         >
@@ -212,7 +212,7 @@ const Flexbox: React.FC = () => {
         </label>
       </div>
       {/* RIGHT */}
-      <div className='button-shadow max-h-[43rem] overflow-scroll bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
+      <div className='button-shadow max-h-[43rem] overflow-scroll bg-white p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
           <motion.div
             className={`flex ${configuration.direction} ${configuration.wrap} ${configuration.justifyContent} ${configuration.alignItems} ${configuration.gap}`}
