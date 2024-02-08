@@ -33,6 +33,7 @@ const Loop: React.FC = () => {
           render={({ field: { value, onChange }, fieldState: { error } }) => (
             <div className='relative w-full'>
               <textarea
+                aria-label='content'
                 autoFocus
                 className='textarea-bordered textarea textarea-lg w-full resize-none'
                 onChange={onChange}
@@ -45,6 +46,7 @@ const Loop: React.FC = () => {
                 data-tip='Copy to clipboard'
               >
                 <Button
+                  aria-label='copy to clipboard'
                   className='btn-primary btn-sm'
                   onClick={() => copyToClipboard(value)}
                 >
@@ -73,6 +75,7 @@ const Loop: React.FC = () => {
             name='repeat'
             render={({ field: { value, onChange } }) => (
               <Input
+                aria-label='repeat count'
                 max={100}
                 min={2}
                 onChange={onChange}

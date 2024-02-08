@@ -20,5 +20,14 @@ module.exports = {
       },
     },
   },
-  daisyui: { themes: ['dark'] },
+  daisyui: {
+    themes: [
+      {
+        dark: {
+          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+          accent: '#14857A',
+        },
+      },
+    ],
+  },
 };

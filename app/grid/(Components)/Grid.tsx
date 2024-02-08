@@ -121,14 +121,14 @@ const Grid: React.FC = () => {
         />
         {/* Advance */}
         <div className='button-shadow collapse-arrow collapse rounded-none border-4 border-[#1E1E1E] bg-white'>
-          <input type='checkbox' />
+          <input aria-label='Advance Settings' type='checkbox' />
           <div className='collapse-title text-xl font-medium'>
             Advance Settings
           </div>
           <div className='collapse-content gap-2 flex-column'>
             {/* Column Span */}
             <div className='collapse'>
-              <input type='checkbox' />
+              <input aria-label='Column Span' type='checkbox' />
               <div className='collapse-title underline'>Column Span</div>
               <div className='collapse-content'>
                 <SelectInput
@@ -154,7 +154,7 @@ const Grid: React.FC = () => {
 
             {/* Column Start */}
             <div className='collapse'>
-              <input type='checkbox' />
+              <input aria-label='Column Start' type='checkbox' />
               <div className='collapse-title underline'>Column Start</div>
               <div className='collapse-content'>
                 <SelectInput
@@ -178,7 +178,7 @@ const Grid: React.FC = () => {
 
             {/* Column End */}
             <div className='collapse'>
-              <input type='checkbox' />
+              <input aria-label='Column End' type='checkbox' />
               <div className='collapse-title underline'>Column End</div>
               <div className='collapse-content'>
                 <SelectInput
@@ -204,7 +204,7 @@ const Grid: React.FC = () => {
 
         {/* Reset Button */}
         <Button
-          className='button-shadow btn-accent btn-outline rounded-none'
+          className='button-shadow btn-accent rounded-none'
           disabled={showCode}
           onClick={() => {
             setConfiguration(initialConfiguration);

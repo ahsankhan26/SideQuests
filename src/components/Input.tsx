@@ -19,6 +19,7 @@ export const Input: React.FC<IInput> = ({
     <div className='relative w-full'>
       {icon ? (
         <button
+          aria-label='send-message'
           className={classNames('absolute inset-y-0 right-3 my-auto', {
             'opacity-50': iconDisabled,
           })}
