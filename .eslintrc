@@ -2,8 +2,7 @@
   "env": {
     "node": true,
     "browser": true,
-    "es6": true,
-    "jest": true
+    "es6": true
   },
   "extends": [
     "airbnb-base",
@@ -130,13 +129,8 @@
     // Configuration for testing
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
-      "extends": [
-        "plugin:jest/recommended",
-        "plugin:jest-formatting/recommended",
-        "plugin:testing-library/react",
-        "plugin:jest-dom/recommended"
-      ]
+      "plugins": ["testing-library"],
+      "extends": ["plugin:testing-library/react"]
     },
     // Configuration for e2e testing (Cypress)
     {

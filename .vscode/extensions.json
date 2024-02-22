@@ -12,7 +12,6 @@
     "aaron-bond.better-comments",
     "mikestead.dotenv",
     "csstools.postcss",
-    "Orta.vscode-jest",
     // Tailwind CSS Intellisense
     "bradlc.vscode-tailwindcss"
   ],
