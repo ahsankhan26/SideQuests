@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import Chat from 'app/prompt/Chat';
 
 import { Hero } from '@/components';

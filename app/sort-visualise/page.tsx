@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import Visualiser from 'app/sort-visualise/(Components)/Visualise';
 
 import { Hero } from '@/components';

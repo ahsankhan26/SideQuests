@@ -3,8 +3,11 @@ import dynamic from 'next/dynamic';
 
 import { Hero } from '@/components';
 
+import './(Components)/styles.css';
+
 const Grid = dynamic(() => import('app/grid/(Components)/Grid'), {
   loading: () => <p>Loading ...</p>,
+  ssr: false,
 });
 
 export const metadata: Metadata = {
