@@ -3,6 +3,9 @@
 import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
+import classNames from 'classnames';
+import { LayoutGroup, motion } from 'framer-motion';
+
 import { SelectInput } from 'app/grid/(Components)/Common';
 import { initialConfiguration } from 'app/grid/(Components)/constants';
 import {
@@ -16,8 +19,6 @@ import {
   prettifiedHtmlString,
 } from 'app/grid/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
-import classNames from 'classnames';
-import { LayoutGroup, motion } from 'framer-motion';
 
 import { Button } from '@/components';
 import { copyToClipboard } from '@/utils';

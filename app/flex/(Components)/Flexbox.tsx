@@ -4,6 +4,8 @@ import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
 import { HiQuestionMarkCircle } from 'react-icons/hi';
+import { LayoutGroup, motion } from 'framer-motion';
+
 import { MenuTitle, Radio } from 'app/flex/(Components)/Common';
 import {
   alignItemsButtons,
@@ -18,7 +20,6 @@ import {
 } from 'app/flex/(Components)/constants';
 import { prettifiedHtmlString } from 'app/flex/(Components)/utils';
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
-import { LayoutGroup, motion } from 'framer-motion';
 
 import { Button } from '@/components';
 import { copyToClipboard } from '@/utils';

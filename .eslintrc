@@ -108,10 +108,10 @@
             "groups": [
               // `react` first, `next` second, then packages starting with a character
               ["^react$", "^react", "^next", "^[a-zA-Z]"],
+              // Packages starting with `app`
+              ["^(app)(/.*|$)"],
               // Packages starting with `@`
-              ["^@"],
-              // Packages starting with `~`
-              ["^~"],
+              ["^@/"],
               // Imports starting with `src/`
               ["^src/"],
               // Imports starting with `../`

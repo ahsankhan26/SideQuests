@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
+
 import {
   easy,
   getRandomSubObject,
   hard,
 } from 'app/capital/(Components)/constants';
-import classNames from 'classnames';
 
 import { Button } from '@/components';
 import { shuffleArray } from '@/utils';
