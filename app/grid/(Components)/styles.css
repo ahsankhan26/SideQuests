@@ -1,0 +1,7 @@
+/* 
+  for pre tag added by `react-highlight` package, 
+  can't access pre tag from props.
+   */
+pre {
+  height: 100%;
+}

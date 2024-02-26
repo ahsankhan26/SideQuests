@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 
 import { Hero } from '@/components';
 
+import './(Components)/styles.css';
+
 export const metadata: Metadata = {
   title: 'Capital Guess Game - SideQuest',
   description: 'Match the country and its capital',
@@ -10,7 +12,7 @@ export const metadata: Metadata = {
 
 const CountryCapitalGame = dynamic(
   () => import('app/capital/(Components)/CountryCapitalGame'),
-  { loading: () => <p>Loading...</p> },
+  { loading: () => <p>Loading...</p>, ssr: false },
 );
 
 const Page: React.FC = () => (
