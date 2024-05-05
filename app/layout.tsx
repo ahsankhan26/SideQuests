@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
-import NextTopLoader from 'nextjs-toploader';
+import HolyLoader from 'holy-loader';
 
 import Footer from 'app/Footer';
 import Header from 'app/Header';
@@ -30,8 +30,7 @@ export default function RootLayout({
       <body className={`${raleway.variable} font-sans`}>
         <div className='min-h-screen justify-between flex-column'>
           <Container>
-            {/* Todo: Add header */}
-            <NextTopLoader shadow={false} showSpinner={false} />
+            <HolyLoader height='3px' />
             <Header />
             {children}
           </Container>
