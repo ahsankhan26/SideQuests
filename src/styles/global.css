@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~highlight.js/styles/monokai.css';
-
 @layer components {
   * {
     box-sizing: border-box;
