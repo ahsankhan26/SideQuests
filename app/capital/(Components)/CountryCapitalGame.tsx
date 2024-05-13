@@ -121,7 +121,7 @@ const CountryCapitalGame: React.FC = () => {
             </strong>
           </div>
           <div>
-            Attempts: <strong>{score}</strong>
+            Attempts: <strong>{Math.floor(score / 2)}</strong>
           </div>
         </div>
         <div>
@@ -143,7 +143,7 @@ const CountryCapitalGame: React.FC = () => {
         {gameData?.map((item) => (
           <Button
             className={classNames('btn-lg h-40', {
-              'btn-primary pointer-events-none border-4 border-info':
+              'btn-primary border-4 border-info':
                 currentSelected?.includes(item) && !isWrong,
               'btn-error border-4 border-error-content':
                 currentSelected?.includes(item) && isWrong,
@@ -156,6 +156,11 @@ const CountryCapitalGame: React.FC = () => {
                   setIsWrong(false);
                   setScore((count) => count + 1);
                   return [item];
+                }
+                // unselect if already selected and update score
+                if (prev.includes(item)) {
+                  setScore((count) => (count > 0 ? count - 1 : 0));
+                  return prev.filter((i) => i !== item);
                 }
                 if (prev.length < 2 && !prev.includes(item)) {
                   setScore((count) => count + 1);
