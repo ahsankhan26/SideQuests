@@ -22,6 +22,9 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.3",
     "classnames": "^2.3.2",
     "daisyui": "^3.5.0",
     "framer-motion": "^9.0.4",
@@ -44,10 +47,12 @@
     "@percy/cypress": "^3.1.2",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
+    "@tailwindcss/typography": "^0.5.13",
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^18.15.0",
     "@types/pretty": "^2.0.1",
     "@types/react": "^18.0.28",

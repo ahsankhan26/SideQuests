@@ -29,6 +29,6 @@ export const homeCards = [
   },
   {
     name: 'tailwind-class-extend (npm)',
-    link: 'https://www.npmjs.com/package/tailwind-class-extend',
+    link: '/tailwind-class-extend',
   },
 ];

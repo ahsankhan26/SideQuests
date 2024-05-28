@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
     require('daisyui'),
     require('tailwind-class-extend'),
+    require('@tailwindcss/typography'),
     plugin(function ({ addBase }) {
       addBase({
         html: { fontSize: '16px' },
