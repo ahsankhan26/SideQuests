@@ -10,7 +10,7 @@ interface TypographyProps {
   style?: React.CSSProperties;
 }
 
-const Typography: React.FC<TypographyProps> = ({
+export const Typography: React.FC<TypographyProps> = ({
   variant = 'p',
   children,
   className,
@@ -49,5 +49,3 @@ const Typography: React.FC<TypographyProps> = ({
     children,
   );
 };
-
-export default Typography;

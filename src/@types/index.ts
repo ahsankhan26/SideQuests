@@ -1,3 +1,1 @@
-// index.ts
-
-export {};
+export * from './Typography';

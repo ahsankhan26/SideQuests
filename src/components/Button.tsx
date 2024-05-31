@@ -1,18 +1,18 @@
 import classNames from 'classnames';
 
-interface IButton extends React.ComponentProps<'button'> {
+interface ButtonProps extends React.ComponentProps<'button'> {
   loading?: boolean;
   fullWidth?: boolean;
 }
 
-export const Button: React.FC<IButton> = ({
+export const Button = ({
   disabled,
   loading,
   fullWidth,
   children,
   className = '',
   ...rest
-}) => (
+}: ButtonProps) => (
   <button
     className={classNames(`btn ${className}`, {
       'btn-disabled': disabled,
