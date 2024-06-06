@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { FiRotateCw, FiX } from 'react-icons/fi';
-import classNames from 'classnames';
+
+import { cn } from '@/utils';
 
 import { generateRandomArr, getRangeValue, isSorted } from './helpers';
 import RangeInput from './RangeInput';
@@ -121,7 +122,7 @@ const Visualiser: React.FC = () => {
           <div className='flex h-full' style={{ transform: 'rotateX(180deg)' }}>
             {arr.map((item, idx) => (
               <div
-                className={classNames('w-32', {
+                className={cn('w-32', {
                   'border-text border-2 border-t-0 bg-rose-500':
                     current === idx,
                   'border bg-white': current !== idx,

@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+
+import { cn } from '@/utils';
 
 interface IRangeInput extends React.ComponentProps<'input'> {
   title: string;
@@ -32,10 +33,9 @@ const RangeInput: React.FC<IRangeInput> = ({
   }, [value]);
   return (
     <fieldset
-      className={classNames(
-        'button-shadow w-full border-4 border-[#1E1E1E] bg-white',
-        { 'lg:w-60': !fullWidth },
-      )}
+      className={cn('button-shadow w-full border-4 border-[#1E1E1E] bg-white', {
+        'lg:w-60': !fullWidth,
+      })}
     >
       <div className='gap-2 flex-column'>
         <div

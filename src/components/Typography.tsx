@@ -1,5 +1,6 @@
 import React from 'react';
-import cn from 'classnames';
+
+import { cn } from '@/utils';
 
 import { Variant } from 'src/@types/Typography';
 
@@ -10,7 +11,7 @@ interface TypographyProps {
   style?: React.CSSProperties;
 }
 
-const Typography: React.FC<TypographyProps> = ({
+export const Typography: React.FC<TypographyProps> = ({
   variant = 'p',
   children,
   className,
@@ -49,5 +50,3 @@ const Typography: React.FC<TypographyProps> = ({
     children,
   );
 };
-
-export default Typography;

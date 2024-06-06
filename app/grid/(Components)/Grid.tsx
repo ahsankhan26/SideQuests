@@ -3,7 +3,6 @@
 import { useMemo, useState } from 'react';
 import Highlight from 'react-highlight';
 import { FiClipboard } from 'react-icons/fi';
-import classNames from 'classnames';
 import { LayoutGroup, motion } from 'framer-motion';
 
 import { SelectInput } from 'app/grid/(Components)/Common';
@@ -21,7 +20,7 @@ import {
 import RangeInput from 'app/sort-visualise/(Components)/RangeInput';
 
 import { Button } from '@/components';
-import { copyToClipboard } from '@/utils';
+import { cn, copyToClipboard } from '@/utils';
 
 const Grid: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
@@ -227,7 +226,7 @@ const Grid: React.FC = () => {
       <div className='button-shadow bg-stone-200 p-5 md:col-span-4 lg:col-span-5'>
         {!showCode ? (
           <motion.div
-            className={classNames(
+            className={cn(
               'grid',
               getGridCols(configuration.columns),
               getGridGap(configuration.gap),
@@ -242,7 +241,7 @@ const Grid: React.FC = () => {
                 const colEnd = advanceConfiguration[idx]?.colEnd;
                 return (
                   <motion.div
-                    className={classNames(
+                    className={cn(
                       'flex h-32 items-center justify-center bg-fuchsia-700 text-2xl font-semibold hover:bg-fuchsia-800',
                       getColSpan(colSpan),
                       getColStart(colStart),

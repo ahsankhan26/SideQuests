@@ -1,20 +1,20 @@
-import classNames from 'classnames';
+import { cn } from '@/utils';
 
-interface IButton extends React.ComponentProps<'button'> {
+interface ButtonProps extends React.ComponentProps<'button'> {
   loading?: boolean;
   fullWidth?: boolean;
 }
 
-export const Button: React.FC<IButton> = ({
+export const Button = ({
   disabled,
   loading,
   fullWidth,
   children,
   className = '',
   ...rest
-}) => (
+}: ButtonProps) => (
   <button
-    className={classNames(`btn ${className}`, {
+    className={cn(`btn ${className}`, {
       'btn-disabled': disabled,
       'btn-block': fullWidth,
     })}

@@ -5,7 +5,7 @@ import HolyLoader from 'holy-loader';
 import Footer from 'app/Footer';
 import Header from 'app/Header';
 
-import Container from '@/components/Container';
+import { Container } from '@/components';
 
 import '../src/styles/global.css';
 
