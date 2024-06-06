@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import classNames from 'classnames';
 
 import {
   easy,
@@ -10,7 +9,7 @@ import {
 } from 'app/capital/(Components)/constants';
 
 import { Button } from '@/components';
-import { shuffleArray } from '@/utils';
+import { cn, shuffleArray } from '@/utils';
 
 enum DIFFICULTY {
   EASY = 20,
@@ -142,7 +141,7 @@ const CountryCapitalGame: React.FC = () => {
       <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
         {gameData?.map((item) => (
           <Button
-            className={classNames('btn-lg h-40', {
+            className={cn('btn-lg h-40', {
               'btn-primary border-4 border-info':
                 currentSelected?.includes(item) && !isWrong,
               'btn-error border-4 border-error-content':

@@ -1,5 +1,6 @@
 import { AiOutlineWarning } from 'react-icons/ai';
-import classNames from 'classnames';
+
+import { cn } from '@/utils';
 
 interface IInput extends React.ComponentProps<'input'> {
   error?: string;
@@ -20,7 +21,7 @@ export const Input: React.FC<IInput> = ({
       {icon ? (
         <button
           aria-label='send-message'
-          className={classNames('absolute inset-y-0 right-3 my-auto', {
+          className={cn('absolute inset-y-0 right-3 my-auto', {
             'opacity-50': iconDisabled,
           })}
           disabled={iconDisabled}
@@ -30,7 +31,7 @@ export const Input: React.FC<IInput> = ({
         </button>
       ) : null}
       <input
-        className={classNames(
+        className={cn(
           `input-bordered input w-full placeholder:text-sm ${className}`,
           { 'input-error': !!error },
         )}

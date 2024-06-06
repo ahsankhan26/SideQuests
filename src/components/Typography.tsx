@@ -1,5 +1,6 @@
 import React from 'react';
-import cn from 'classnames';
+
+import { cn } from '@/utils';
 
 import { Variant } from 'src/@types/Typography';
 

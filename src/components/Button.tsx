@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { cn } from '@/utils';
 
 interface ButtonProps extends React.ComponentProps<'button'> {
   loading?: boolean;
@@ -14,7 +14,7 @@ export const Button = ({
   ...rest
 }: ButtonProps) => (
   <button
-    className={classNames(`btn ${className}`, {
+    className={cn(`btn ${className}`, {
       'btn-disabled': disabled,
       'btn-block': fullWidth,
     })}
