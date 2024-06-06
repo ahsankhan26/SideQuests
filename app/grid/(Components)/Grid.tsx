@@ -13,6 +13,10 @@ import {
   getColStart,
   getGridCols,
   getGridGap,
+  getGridRows,
+  getRowEnd,
+  getRowSpan,
+  getRowStart,
   IAdvanceConfiguration,
   IConfiguration,
   prettifiedHtmlString,
@@ -104,6 +108,18 @@ const Grid: React.FC = () => {
           title='Columns'
           titleClassName='bg-[#22a094]'
           value={configuration.columns}
+        />
+        <RangeInput
+          aria-label='Rows'
+          disabled={showCode}
+          fullWidth
+          onChange={(e) =>
+            handleConfigurationChange({ rows: Number(e.target.value) })
+          }
+          range={[1, 6]}
+          title='Rows'
+          titleClassName='bg-[#FFAC]'
+          value={configuration.rows}
         />
         <RangeInput
           aria-label='Gap'
@@ -199,6 +215,80 @@ const Grid: React.FC = () => {
                 />
               </div>
             </div>
+
+            {/* Row Span */}
+            <div className='collapse'>
+              <input aria-label='Row Span' type='checkbox' />
+              <div className='collapse-title underline'>Row Span</div>
+              <div className='collapse-content'>
+                <SelectInput
+                  disabled={showCode}
+                  items={items}
+                  name='Span'
+                  onChange={(e, item) => {
+                    const { value } = e.target;
+                    const isNaN = Number.isNaN(Number(value));
+                    const val = isNaN && value === 'full' ? 'full' : 'auto';
+                    handleAdvanceConfigurationChange(
+                      {
+                        rowSpan: Number.isNaN(Number(value))
+                          ? val
+                          : Number(value),
+                      },
+                      item,
+                    );
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Row Start */}
+            <div className='collapse'>
+              <input aria-label='Row Start' type='checkbox' />
+              <div className='collapse-title underline'>Row Start</div>
+              <div className='collapse-content'>
+                <SelectInput
+                  disabled={showCode}
+                  items={items}
+                  name='Start'
+                  onChange={(e, item) => {
+                    const { value } = e.target;
+                    handleAdvanceConfigurationChange(
+                      {
+                        rowStart: Number.isNaN(Number(value))
+                          ? 'auto'
+                          : Number(value),
+                      },
+                      item,
+                    );
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Row End */}
+            <div className='collapse'>
+              <input aria-label='Row End' type='checkbox' />
+              <div className='collapse-title underline'>Row End</div>
+              <div className='collapse-content'>
+                <SelectInput
+                  disabled={showCode}
+                  items={items}
+                  name='End'
+                  onChange={(e, item) => {
+                    const { value } = e.target;
+                    handleAdvanceConfigurationChange(
+                      {
+                        rowEnd: Number.isNaN(Number(value))
+                          ? 'auto'
+                          : Number(value),
+                      },
+                      item,
+                    );
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -228,6 +318,7 @@ const Grid: React.FC = () => {
           <motion.div
             className={cn(
               'grid',
+              getGridRows(configuration.rows),
               getGridCols(configuration.columns),
               getGridGap(configuration.gap),
             )}
@@ -239,13 +330,19 @@ const Grid: React.FC = () => {
                 const colSpan = advanceConfiguration[idx]?.colSpan;
                 const colStart = advanceConfiguration[idx]?.colStart;
                 const colEnd = advanceConfiguration[idx]?.colEnd;
+                const rowSpan = advanceConfiguration[idx]?.rowSpan;
+                const rowStart = advanceConfiguration[idx]?.rowStart;
+                const rowEnd = advanceConfiguration[idx]?.rowEnd;
                 return (
                   <motion.div
                     className={cn(
-                      'flex h-32 items-center justify-center bg-fuchsia-700 text-2xl font-semibold hover:bg-fuchsia-800',
+                      'flex h-full min-h-[8rem] items-center justify-center bg-fuchsia-700 text-2xl font-semibold hover:bg-fuchsia-800',
                       getColSpan(colSpan),
                       getColStart(colStart),
                       getColEnd(colEnd),
+                      getRowSpan(rowSpan),
+                      getRowStart(rowStart),
+                      getRowEnd(rowEnd),
                     )}
                     key={item}
                     layout

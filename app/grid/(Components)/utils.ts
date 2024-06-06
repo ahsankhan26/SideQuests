@@ -5,6 +5,7 @@ import { removeFramerAttributes } from '@/utils';
 export interface IConfiguration {
   itemCount: number;
   columns: number;
+  rows: number;
   gap: number;
 }
 
@@ -12,7 +13,21 @@ export interface IAdvanceConfiguration {
   colSpan?: number | 'auto' | 'full';
   colStart?: number | 'auto';
   colEnd?: number | 'auto';
+  rowSpan?: number | 'auto' | 'full';
+  rowStart?: number | 'auto';
+  rowEnd?: number | 'auto';
 }
+
+export const getGridRows = (rows: number) => {
+  return {
+    'grid-rows-1': rows === 1,
+    'grid-rows-2': rows === 2,
+    'grid-rows-3': rows === 3,
+    'grid-rows-4': rows === 4,
+    'grid-rows-5': rows === 5,
+    'grid-rows-6': rows === 6,
+  };
+};
 
 export const getGridCols = (columns: number) => {
   return {
@@ -90,6 +105,39 @@ export const getColEnd = (colEnd: number | 'auto' | undefined) => {
     'col-end-10': colEnd === 10,
     'col-end-11': colEnd === 11,
     'col-end-12': colEnd === 12,
+  };
+};
+
+export const getRowSpan = (rowSpan: number | 'auto' | 'full' | undefined) => {
+  return {
+    'row-auto': rowSpan === 'auto',
+    'row-span-1': rowSpan === 1,
+    'row-span-2': rowSpan === 2,
+    'row-span-3': rowSpan === 3,
+    'row-span-4': rowSpan === 4,
+    'row-span-5': rowSpan === 5,
+    'row-span-6': rowSpan === 6,
+    'row-span-full': rowSpan === 'full',
+  };
+};
+export const getRowStart = (rowStart: number | 'auto' | undefined) => {
+  return {
+    'row-start-auto': rowStart === 'auto',
+    'row-start-2': rowStart === 2,
+    'row-start-3': rowStart === 3,
+    'row-start-4': rowStart === 4,
+    'row-start-5': rowStart === 5,
+    'row-start-6': rowStart === 6,
+  };
+};
+export const getRowEnd = (rowEnd: number | 'auto' | undefined) => {
+  return {
+    'row-end-auto': rowEnd === 'auto',
+    'row-end-2': rowEnd === 2,
+    'row-end-3': rowEnd === 3,
+    'row-end-4': rowEnd === 4,
+    'row-end-5': rowEnd === 5,
+    'row-end-6': rowEnd === 6,
   };
 };
 
