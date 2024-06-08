@@ -14,10 +14,11 @@ export const Button = ({
   ...rest
 }: ButtonProps) => (
   <button
-    className={cn(`btn ${className}`, {
-      'btn-disabled': disabled,
-      'btn-block': fullWidth,
-    })}
+    className={cn(
+      'btn',
+      { 'btn-disabled': disabled, 'btn-block': fullWidth },
+      className,
+    )}
     {...rest}
   >
     {/* spinner */}
