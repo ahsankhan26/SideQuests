@@ -1,5 +1,21 @@
 import { FaCheck, FaX } from 'react-icons/fa6';
 
+import { cn } from '@/utils';
+
+interface ContainerProps extends React.PropsWithChildren {
+  className?: string;
+}
+const Container = ({ className = '', children }: ContainerProps) => (
+  <div
+    className={cn(
+      'min-h-[600px] rounded-xl border border-zinc-500 p-5 md:p-10',
+      className,
+    )}
+  >
+    {children}
+  </div>
+);
+
 interface ScoreIconProps {
   score: boolean;
   selectedOption: string;
@@ -24,4 +40,5 @@ const ScoreIcon = ({ score, selectedOption, option }: ScoreIconProps) => {
     />
   );
 };
-export default ScoreIcon;
+
+export { Container, ScoreIcon };
