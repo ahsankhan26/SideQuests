@@ -104,7 +104,9 @@ const GuessTheFlag = () => {
                   {
                     'pointer-events-none': score[currentIndex] !== undefined,
                     'bg-success/30':
-                      score[currentIndex] && selectedFlag === option,
+                      (score[currentIndex] && selectedFlag === option) ||
+                      (score[currentIndex] === false &&
+                        randomCountries[currentIndex]?.flag === option),
                     'bg-error/30':
                       !score[currentIndex] && selectedFlag === option,
                   },
@@ -116,8 +118,9 @@ const GuessTheFlag = () => {
 
               {/* Display the correct or wrong icon based on score */}
               <ScoreIcon
+                correctOption={randomCountries[currentIndex]?.flag}
                 option={option}
-                score={score[currentIndex] ?? false}
+                score={score[currentIndex]}
                 selectedOption={selectedFlag ?? ''}
               />
             </div>
