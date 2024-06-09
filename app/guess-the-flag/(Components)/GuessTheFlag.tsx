@@ -2,12 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import ScoreIcon from 'app/guess-the-flag/(Components)/ScoreIcon';
-
 import { Button } from '@/components';
 import { cn, shuffleArray } from '@/utils';
 
-import { SELECTED_COUNTRIES_LENGTH } from './constants';
+import { Container, ScoreIcon } from './Common';
+import { OPTIONS_LENGTH, SELECTED_COUNTRIES_LENGTH } from './constants';
 import { Country } from './countries';
 import { getRandomCountries, getRandomFlags } from './utils';
 
@@ -53,7 +52,7 @@ const GuessTheFlag = () => {
     const currentCountry = randomCountries[currentIndex];
     if (currentCountry) {
       const arr = [
-        ...getRandomFlags(currentCountry.similarFlags, 2),
+        ...getRandomFlags(currentCountry.similarFlags, OPTIONS_LENGTH),
         currentCountry.flag,
       ];
       return shuffleArray(arr);
@@ -61,33 +60,61 @@ const GuessTheFlag = () => {
     return [];
   }, [currentIndex, randomCountries]);
 
+  const isGameOver = useMemo(
+    () =>
+      score[currentIndex] !== undefined &&
+      currentIndex === randomCountries.length - 1,
+    [currentIndex, randomCountries, score],
+  );
+
+  if (isGameOver) {
+    return (
+      <Container className='min-h-[20rem] flex-col flex-center'>
+        <h1 className='text-center text-4xl font-semibold md:text-6xl'>
+          Game Over
+        </h1>
+        <div className='flex flex-col items-center gap-5'>
+          <p className='text-center text-lg font-medium'>
+            Your score is {score.filter((item) => item).length} /{' '}
+            {randomCountries.length}
+          </p>
+          <Button className='btn-accent' onClick={reset}>
+            Play Again
+          </Button>
+        </div>
+      </Container>
+    );
+  }
+
   return (
-    <div className='min-h-[430px] rounded-md border border-zinc-500 p-10 pt-2'>
-      <Button onClick={reset}>Reset</Button>
+    <Container className='md:pt-2'>
       <p className='text-center text-lg font-medium'>
         {currentIndex + 1} / {randomCountries.length}
       </p>
       <div className='mx-auto flex flex-col items-center gap-10'>
-        <h1 className='text-6xl font-semibold'>
+        <h1 className='text-center text-4xl font-semibold md:text-6xl'>
           {randomCountries[currentIndex]?.name}
         </h1>
-        <div className='flex w-full flex-wrap justify-center gap-8 text-9xl'>
+        <div className='grid grid-cols-2 gap-3 md:gap-6'>
           {options.map((option, index) => (
             <div className='relative' key={`${option}_${index}`}>
               <Button
-                className={cn('btn-outline h-full border-zinc-500 text-9xl', {
-                  'pointer-events-none': score[currentIndex] !== undefined,
-                  'bg-success/30':
-                    score[currentIndex] && selectedFlag === option,
-                  'bg-error/30':
-                    !score[currentIndex] && selectedFlag === option,
-                })}
+                className={cn(
+                  'btn-outline h-28 w-28 border-zinc-500 text-7xl md:h-36 md:w-36 md:text-9xl',
+                  {
+                    'pointer-events-none': score[currentIndex] !== undefined,
+                    'bg-success/30':
+                      score[currentIndex] && selectedFlag === option,
+                    'bg-error/30':
+                      !score[currentIndex] && selectedFlag === option,
+                  },
+                )}
                 onClick={() => handleFlagSelect(option)}
               >
                 {option}
               </Button>
-              {/* Display the correct or wrong icon based on score */}
 
+              {/* Display the correct or wrong icon based on score */}
               <ScoreIcon
                 option={option}
                 score={score[currentIndex] ?? false}
@@ -108,7 +135,7 @@ const GuessTheFlag = () => {
           </Button>
         )}
       </div>
-    </div>
+    </Container>
   );
 };
 export default GuessTheFlag;
