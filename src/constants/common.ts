@@ -31,4 +31,8 @@ export const homeCards = [
     name: 'tailwind-class-extend (npm)',
     link: '/tailwind-class-extend',
   },
+  {
+    name: 'Guess the Flag',
+    link: '/guess-the-flag',
+  },
 ];

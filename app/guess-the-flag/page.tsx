@@ -16,10 +16,7 @@ const GuessTheFlag = dynamic(
 const Page = () => {
   return (
     <div>
-      <Hero
-        subtitle='Choose the right one from the options.'
-        title='Guess The Flag'
-      />
+      <Hero title='Guess The Flag' />
       <GuessTheFlag />
     </div>
   );
