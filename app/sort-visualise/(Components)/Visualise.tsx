@@ -38,7 +38,10 @@ const Visualiser: React.FC = () => {
     stopSort.current = false; // ref to force stop
     setInProgress(true);
     const tempArr = [...arr];
+    let swapped;
+
     for (let i = 0; i < tempArr.length; i += 1) {
+      swapped = false;
       for (let j = 0; j < tempArr.length - i - 1; j += 1) {
         if (stopSort.current) {
           setInProgress(false);
@@ -49,12 +52,14 @@ const Visualiser: React.FC = () => {
           const temp = tempArr[j] as number;
           tempArr[j] = tempArr[j + 1] as number;
           tempArr[j + 1] = temp;
+          swapped = true;
         }
         // eslint-disable-next-line no-promise-executor-return, no-await-in-loop
-        await new Promise((resolve) => setTimeout(() => resolve(0), speed));
+        await new Promise((resolve) => setTimeout(resolve, speed));
         setCurrent(j + 1);
         setArr([...tempArr]);
       }
+      if (!swapped) break;
     }
     setInProgress(false);
     setCurrent(0);
