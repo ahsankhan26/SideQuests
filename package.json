@@ -11,7 +11,7 @@
     "clean": "rimraf .next out",
     "lint": "next lint",
     "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
-    "check-types": "tsc --noEmit --pretty && tsc --project",
+    "check-types": "tsc --noEmit --pretty",
     "test": "jest",
     "commit": "cz",
     "prepare": "husky install",
