@@ -96,7 +96,7 @@ const Visualiser: React.FC = () => {
             values={['1x', '2x', '🚀']}
           />
         </div>
-        <div className='flex gap-4 wh-full lg:w-auto'>
+        <div className='flex size-full gap-4 lg:w-auto'>
           <SortButton
             aria-label='shuffle'
             onClick={() => {
