@@ -10454,10 +10454,10 @@ synckit@^0.8.4:
     "@pkgr/utils" "^2.3.1"
     tslib "^2.5.0"
 
-tailwind-class-extend@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/tailwind-class-extend/-/tailwind-class-extend-1.0.1.tgz#070e12b459452786456259777ba24736664cc2b8"
-  integrity sha512-WSYmTlPQUtUfWoBA3g33uO2l2bwi0CxG79owsILtxXAb39h3GGOkW4IS/hvQaRPg3CX8W72Etlskc+5v3VSw8A==
+tailwind-class-extend@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/tailwind-class-extend/-/tailwind-class-extend-1.0.4.tgz#bf178766223c71d95344e7e0b899a8f1d6b4a828"
+  integrity sha512-phxOn+E/NEl8KwuGXVOr+MR7nj8IdRwmLmSzUmHo9Lt9Z4byKHyY8MzF0mRu/kR12/E81WwtpWZtUXemP1lIuw==
 
 tailwind-merge@^2.3.0:
   version "2.3.0"
