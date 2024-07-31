@@ -65,9 +65,7 @@ const RangeInput: React.FC<IRangeInput> = ({
                 <span>{range[1]}</span>
               </>
             ) : null}
-            {values?.map((val) => (
-              <span key={val}>{val}</span>
-            ))}
+            {values?.map((val) => <span key={val}>{val}</span>)}
           </div>
         </div>
       </div>
