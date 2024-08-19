@@ -6,11 +6,21 @@ import { Button } from '@/components';
 import { cn, shuffleArray } from '@/utils';
 
 import { Container, ScoreIcon } from './Common';
-import { OPTIONS_LENGTH, SELECTED_COUNTRIES_LENGTH } from './constants';
-import { Country } from './countries';
+import {
+  Country,
+  DIFFICULTY,
+  GAME_STATE,
+  GameInfo,
+  OPTIONS_LENGTH,
+  SELECTED_COUNTRIES_LENGTH,
+} from './constants';
 import { getRandomCountries, getRandomFlags } from './utils';
 
 const GuessTheFlag = () => {
+  const [gameInfo, setGameInfo] = useState<GameInfo>({
+    difficulty: DIFFICULTY.EASY,
+    gameState: GAME_STATE.START,
+  });
   const [randomCountries, setRandomCountries] = useState<Country[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedFlag, setSelectedFlag] = useState<string | null>(null);
@@ -81,6 +91,26 @@ const GuessTheFlag = () => {
           <Button className='btn-accent' onClick={reset}>
             Play Again
           </Button>
+        </div>
+      </Container>
+    );
+  }
+
+  if (gameInfo.gameState === GAME_STATE.START) {
+    return (
+      <Container className='md:pt-2'>
+        <div className='min-h-inherit gap-10 flex-center'>
+          <div
+            onClick={() =>
+              setGameInfo({
+                difficulty: DIFFICULTY.EASY,
+                gameState: GAME_STATE.PLAYING,
+              })
+            }
+          >
+            Easy
+          </div>
+          <div>Hard</div>
         </div>
       </Container>
     );

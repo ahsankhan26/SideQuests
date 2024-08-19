@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
-import { Hero } from '@/components';
-
 export const metadata: Metadata = {
   title: 'Guess The Flag - SideQuest',
   description: 'Choose the right one from the options',
@@ -16,7 +14,7 @@ const GuessTheFlag = dynamic(
 const Page = () => {
   return (
     <div>
-      <Hero title='Guess The Flag' />
+      {/* <Hero title='Guess The Flag' /> */}
       <GuessTheFlag />
     </div>
   );

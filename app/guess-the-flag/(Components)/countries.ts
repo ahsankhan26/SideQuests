@@ -1,8 +1,4 @@
-export interface Country {
-  name: string;
-  flag: string;
-  similarFlags: string[];
-}
+import { Country } from './constants';
 
 export const countries: Country[] = [
   {
