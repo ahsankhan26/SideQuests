@@ -7,12 +7,12 @@ import { cn, shuffleArray } from '@/utils';
 
 import { Container, ScoreIcon } from './Common';
 import {
+  COUNTRIES_LENGTH,
   Country,
   DIFFICULTY,
   GAME_STATE,
   GameInfo,
   OPTIONS_LENGTH,
-  SELECTED_COUNTRIES_LENGTH,
 } from './constants';
 import { getRandomCountries, getRandomFlags } from './utils';
 
@@ -23,39 +23,53 @@ const GuessTheFlag = () => {
   });
   const [randomCountries, setRandomCountries] = useState<Country[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isOptionSelected, setIsOptionSelected] = useState(false);
   const [selectedFlag, setSelectedFlag] = useState<string | null>(null);
   // array to maintain score,
   // user will be displayed with correct or wrong based `score[currentIndex]` value
   const [score, setScore] = useState<boolean[]>([]);
 
-  // Reset the game
-  const reset = useCallback(() => {
-    setCurrentIndex(0);
-    setScore([]);
-    setRandomCountries(getRandomCountries(SELECTED_COUNTRIES_LENGTH));
-  }, []);
+  const reset = () => {
+    setGameInfo({ gameState: GAME_STATE.START });
+  };
+
+  // start the game
+  const start = useCallback(
+    (difficulty: DIFFICULTY) => {
+      setCurrentIndex(0);
+      setScore([]);
+      setRandomCountries(
+        getRandomCountries(
+          COUNTRIES_LENGTH[gameInfo.difficulty ?? DIFFICULTY.EASY],
+        ),
+      );
+      setGameInfo({
+        gameState: GAME_STATE.PLAYING,
+        difficulty,
+      });
+      setIsOptionSelected(false);
+    },
+    [gameInfo],
+  );
 
   // Handle the next button after option is selected
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => prev + 1);
+    setIsOptionSelected(false);
   }, []);
 
   // handle the flag selection
   const handleFlagSelect = useCallback(
     (selected: string) => {
-      if (score[currentIndex] !== undefined) return;
+      if (isOptionSelected) return;
       const currentCountry = randomCountries[currentIndex];
       if (!currentCountry) return;
       setSelectedFlag(selected);
       setScore((prev) => [...prev, selected === currentCountry.flag]);
+      setIsOptionSelected(true);
     },
-    [currentIndex, randomCountries],
+    [currentIndex, randomCountries, isOptionSelected],
   );
-
-  // Initiate the game
-  useEffect(() => {
-    reset();
-  }, []);
 
   // Get the flag options, one correct and two wrong from similar flags array
   const options = useMemo(() => {
@@ -70,27 +84,35 @@ const GuessTheFlag = () => {
     return [];
   }, [currentIndex, randomCountries]);
 
-  const isGameOver = useMemo(
-    () =>
+  // is game over
+  useEffect(() => {
+    const isGameOver =
       score[currentIndex] !== undefined &&
-      currentIndex === randomCountries.length - 1,
-    [currentIndex, randomCountries, score],
-  );
+      currentIndex === randomCountries.length - 1;
+    if (isGameOver) {
+      setGameInfo({
+        gameState: GAME_STATE.END,
+      });
+    }
+  }, [currentIndex, randomCountries, score]);
 
-  if (isGameOver) {
+  // is game over
+  if (gameInfo.gameState === GAME_STATE.END) {
     return (
-      <Container className='min-h-[20rem] flex-col flex-center'>
-        <h1 className='text-center text-4xl font-semibold md:text-6xl'>
-          Game Over
-        </h1>
-        <div className='flex flex-col items-center gap-5'>
-          <p className='text-center text-lg font-medium'>
-            Your score is {score.filter((item) => item).length} /{' '}
-            {randomCountries.length}
-          </p>
-          <Button className='btn-accent' onClick={reset}>
-            Play Again
-          </Button>
+      <Container>
+        <div className='min-h-inherit flex-col flex-center'>
+          <h1 className='text-center text-4xl font-semibold md:text-6xl'>
+            Game Over
+          </h1>
+          <div className='flex flex-col items-center gap-5'>
+            <p className='text-center text-lg font-medium'>
+              Your score is {score.filter((item) => item).length} /{' '}
+              {randomCountries.length}
+            </p>
+            <Button className='btn-accent' onClick={reset}>
+              Play Again
+            </Button>
+          </div>
         </div>
       </Container>
     );
@@ -99,18 +121,19 @@ const GuessTheFlag = () => {
   if (gameInfo.gameState === GAME_STATE.START) {
     return (
       <Container className='md:pt-2'>
-        <div className='min-h-inherit gap-10 flex-center'>
+        <div className='min-h-inherit gap-5 flex-center'>
           <div
-            onClick={() =>
-              setGameInfo({
-                difficulty: DIFFICULTY.EASY,
-                gameState: GAME_STATE.PLAYING,
-              })
-            }
+            className='btn btn-lg btn-accent'
+            onClick={() => start(DIFFICULTY.EASY)}
           >
             Easy
           </div>
-          <div>Hard</div>
+          <div
+            className='btn btn-lg btn-accent'
+            onClick={() => start(DIFFICULTY.HARD)}
+          >
+            HARD
+          </div>
         </div>
       </Container>
     );
@@ -132,7 +155,7 @@ const GuessTheFlag = () => {
                 className={cn(
                   'btn-outline h-28 w-28 border-zinc-500 text-7xl md:h-36 md:w-36 md:text-9xl',
                   {
-                    'pointer-events-none': score[currentIndex] !== undefined,
+                    'pointer-events-none ring-0': isOptionSelected,
                     'bg-success/30':
                       (score[currentIndex] && selectedFlag === option) ||
                       (score[currentIndex] === false &&
@@ -157,7 +180,7 @@ const GuessTheFlag = () => {
           ))}
         </div>
         {/* Display the next button */}
-        {score[currentIndex] !== undefined && (
+        {isOptionSelected && (
           <Button
             className='btn-accent max-w-xl'
             disabled={currentIndex === randomCountries.length - 1}
