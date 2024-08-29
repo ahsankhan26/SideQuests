@@ -11,16 +11,12 @@ import {
   Country,
   DIFFICULTY,
   GAME_STATE,
-  GameInfo,
   OPTIONS_LENGTH,
 } from './constants';
 import { getRandomCountries, getRandomFlags } from './utils';
 
 const GuessTheFlag = () => {
-  const [gameInfo, setGameInfo] = useState<GameInfo>({
-    difficulty: DIFFICULTY.EASY,
-    gameState: GAME_STATE.START,
-  });
+  const [gameState, setGameState] = useState<GAME_STATE>(GAME_STATE.START);
   const [randomCountries, setRandomCountries] = useState<Country[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOptionSelected, setIsOptionSelected] = useState(false);
@@ -29,34 +25,26 @@ const GuessTheFlag = () => {
   // user will be displayed with correct or wrong based `score[currentIndex]` value
   const [score, setScore] = useState<boolean[]>([]);
 
-  const reset = () => {
-    setGameInfo({ gameState: GAME_STATE.START });
-  };
+  const reset = useCallback(() => setGameState(GAME_STATE.START), []);
 
   // start the game
-  const start = useCallback(
-    (difficulty: DIFFICULTY) => {
-      setCurrentIndex(0);
-      setScore([]);
-      setRandomCountries(
-        getRandomCountries(
-          COUNTRIES_LENGTH[gameInfo.difficulty ?? DIFFICULTY.EASY],
-        ),
-      );
-      setGameInfo({
-        gameState: GAME_STATE.PLAYING,
-        difficulty,
-      });
-      setIsOptionSelected(false);
-    },
-    [gameInfo],
-  );
+  const start = useCallback((difficulty: DIFFICULTY) => {
+    setScore([]);
+    setCurrentIndex(0);
+    setIsOptionSelected(false);
+    setRandomCountries(getRandomCountries(COUNTRIES_LENGTH[difficulty]));
+    setGameState(GAME_STATE.PLAYING);
+  }, []);
 
   // Handle the next button after option is selected
   const handleNext = useCallback(() => {
+    if (gameState === GAME_STATE.SCORE_CHECK) {
+      setGameState(GAME_STATE.END);
+      return;
+    }
     setCurrentIndex((prev) => prev + 1);
     setIsOptionSelected(false);
-  }, []);
+  }, [gameState]);
 
   // handle the flag selection
   const handleFlagSelect = useCallback(
@@ -86,18 +74,16 @@ const GuessTheFlag = () => {
 
   // is game over
   useEffect(() => {
-    const isGameOver =
+    const isLastOption =
       score[currentIndex] !== undefined &&
       currentIndex === randomCountries.length - 1;
-    if (isGameOver) {
-      setGameInfo({
-        gameState: GAME_STATE.END,
-      });
+    if (isLastOption) {
+      setGameState(GAME_STATE.SCORE_CHECK);
     }
   }, [currentIndex, randomCountries, score]);
 
   // is game over
-  if (gameInfo.gameState === GAME_STATE.END) {
+  if (gameState === GAME_STATE.END) {
     return (
       <Container>
         <div className='min-h-inherit flex-col flex-center'>
@@ -118,21 +104,35 @@ const GuessTheFlag = () => {
     );
   }
 
-  if (gameInfo.gameState === GAME_STATE.START) {
+  if (gameState === GAME_STATE.START) {
     return (
-      <Container className='md:pt-2'>
-        <div className='min-h-inherit gap-5 flex-center'>
-          <div
-            className='btn btn-lg btn-accent'
-            onClick={() => start(DIFFICULTY.EASY)}
-          >
-            Easy
+      <Container>
+        <div className='min-h-inherit text-center gap-10 flex-col sm:flex-row flex-center'>
+          <div>
+            <Button
+              className='btn-lg btn-success'
+              fullWidth
+              onClick={() => start(DIFFICULTY.EASY)}
+            >
+              Easy
+            </Button>
+            <div className='mt-5'>
+              <p className='text-lg'>10 attempts with recognizable flags</p>
+              <strong>Perfect for a quick challenge</strong>
+            </div>
           </div>
-          <div
-            className='btn btn-lg btn-accent'
-            onClick={() => start(DIFFICULTY.HARD)}
-          >
-            HARD
+          <div>
+            <Button
+              className='btn-lg btn-error'
+              fullWidth
+              onClick={() => start(DIFFICULTY.HARD)}
+            >
+              Hard
+            </Button>
+            <p className='mt-5'>
+              <p className='text-lg'>20 attempts with a global flag pool</p>
+              <strong>Test your world knowledge!</strong>
+            </p>
           </div>
         </div>
       </Container>
@@ -183,11 +183,10 @@ const GuessTheFlag = () => {
         {isOptionSelected && (
           <Button
             className='btn-accent max-w-xl'
-            disabled={currentIndex === randomCountries.length - 1}
             fullWidth
             onClick={handleNext}
           >
-            Next
+            {gameState === GAME_STATE.SCORE_CHECK ? 'Check Score' : 'Next'}
           </Button>
         )}
       </div>
