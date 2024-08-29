@@ -9,10 +9,9 @@
     "zignd.html-css-class-completion",
     "streetsidesoftware.code-spell-checker",
     "naumovs.color-highlight",
-    "aaron-bond.better-comments",
+    "amirha.better-comments-2",
     "mikestead.dotenv",
     "csstools.postcss",
-    "Orta.vscode-jest",
     // Tailwind CSS Intellisense
     "bradlc.vscode-tailwindcss"
   ],
