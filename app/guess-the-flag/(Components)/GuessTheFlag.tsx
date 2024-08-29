@@ -31,8 +31,14 @@ const GuessTheFlag = () => {
   const start = useCallback((difficulty: DIFFICULTY) => {
     setScore([]);
     setCurrentIndex(0);
+    setSelectedFlag(null);
     setIsOptionSelected(false);
-    setRandomCountries(getRandomCountries(COUNTRIES_LENGTH[difficulty]));
+    setRandomCountries(
+      getRandomCountries({
+        difficulty,
+        length: COUNTRIES_LENGTH[difficulty],
+      }),
+    );
     setGameState(GAME_STATE.PLAYING);
   }, []);
 
@@ -44,6 +50,7 @@ const GuessTheFlag = () => {
     }
     setCurrentIndex((prev) => prev + 1);
     setIsOptionSelected(false);
+    setSelectedFlag(null);
   }, [gameState]);
 
   // handle the flag selection
@@ -129,10 +136,10 @@ const GuessTheFlag = () => {
             >
               Hard
             </Button>
-            <p className='mt-5'>
+            <div className='mt-5'>
               <p className='text-lg'>20 attempts with a global flag pool</p>
               <strong>Test your world knowledge!</strong>
-            </p>
+            </div>
           </div>
         </div>
       </Container>

@@ -1,5 +1,251 @@
 import { Country } from './constants';
 
+const easySimilarFlags = [
+  '🇺🇸',
+  '🇨🇦',
+  '🇬🇧',
+  '🇫🇷',
+  '🇩🇪',
+  '🇮🇹',
+  '🇪🇸',
+  '🇯🇵',
+  '🇨🇳',
+  '🇮🇳',
+  '🇷🇺',
+  '🇧🇷',
+  '🇲🇽',
+  '🇦🇺',
+  '🇳🇿',
+  '🇿🇦',
+  '🇰🇷',
+  '🇸🇦',
+  '🇦🇪',
+  '🇹🇷',
+  '🇳🇴',
+  '🇸🇪',
+  '🇩🇰',
+  '🇫🇮',
+  '🇬🇷',
+  '🇵🇱',
+  '🇵🇹',
+  '🇮🇪',
+  '🇨🇭',
+  '🇦🇹',
+  '🇧🇪',
+  '🇳🇱',
+  '🇨🇱',
+  '🇦🇷',
+  '🇨🇴',
+  '🇵🇪',
+  '🇻🇪',
+  '🇿🇼',
+  '🇳🇬',
+  '🇳🇵',
+];
+
+export const easy: Country[] = [
+  {
+    name: 'Argentina',
+    flag: '🇦🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇦🇷'),
+  },
+  {
+    name: 'Australia',
+    flag: '🇦🇺',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇦🇺'),
+  },
+  {
+    name: 'Austria',
+    flag: '🇦🇹',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇦🇹'),
+  },
+  {
+    name: 'Belgium',
+    flag: '🇧🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇧🇪'),
+  },
+  {
+    name: 'Brazil',
+    flag: '🇧🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇧🇷'),
+  },
+  {
+    name: 'Canada',
+    flag: '🇨🇦',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇨🇦'),
+  },
+  {
+    name: 'Chile',
+    flag: '🇨🇱',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇨🇱'),
+  },
+  {
+    name: 'China',
+    flag: '🇨🇳',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇨🇳'),
+  },
+  {
+    name: 'Colombia',
+    flag: '🇨🇴',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇨🇴'),
+  },
+  {
+    name: 'Denmark',
+    flag: '🇩🇰',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇩🇰'),
+  },
+  {
+    name: 'Finland',
+    flag: '🇫🇮',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇫🇮'),
+  },
+  {
+    name: 'France',
+    flag: '🇫🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇫🇷'),
+  },
+  {
+    name: 'Germany',
+    flag: '🇩🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇩🇪'),
+  },
+  {
+    name: 'Greece',
+    flag: '🇬🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇬🇷'),
+  },
+  {
+    name: 'India',
+    flag: '🇮🇳',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇮🇳'),
+  },
+  {
+    name: 'Ireland',
+    flag: '🇮🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇮🇪'),
+  },
+  {
+    name: 'Italy',
+    flag: '🇮🇹',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇮🇹'),
+  },
+  {
+    name: 'Japan',
+    flag: '🇯🇵',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇯🇵'),
+  },
+  {
+    name: 'Mexico',
+    flag: '🇲🇽',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇲🇽'),
+  },
+  {
+    name: 'Nepal',
+    flag: '🇳🇵',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇳🇵'),
+  },
+  {
+    name: 'Netherlands',
+    flag: '🇳🇱',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇳🇱'),
+  },
+  {
+    name: 'New Zealand',
+    flag: '🇳🇿',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇳🇿'),
+  },
+  {
+    name: 'Nigeria',
+    flag: '🇳🇬',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇳🇬'),
+  },
+  {
+    name: 'Norway',
+    flag: '🇳🇴',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇳🇴'),
+  },
+  {
+    name: 'Pakistan',
+    flag: '🇵🇰',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇵🇰'),
+  },
+  {
+    name: 'Peru',
+    flag: '🇵🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇵🇪'),
+  },
+  {
+    name: 'Poland',
+    flag: '🇵🇱',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇵🇱'),
+  },
+  {
+    name: 'Portugal',
+    flag: '🇵🇹',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇵🇹'),
+  },
+  {
+    name: 'Saudi Arabia',
+    flag: '🇸🇦',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇸🇦'),
+  },
+  {
+    name: 'South Africa',
+    flag: '🇿🇦',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇿🇦'),
+  },
+  {
+    name: 'South Korea',
+    flag: '🇰🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇰🇷'),
+  },
+  {
+    name: 'Spain',
+    flag: '🇪🇸',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇪🇸'),
+  },
+  {
+    name: 'Sweden',
+    flag: '🇸🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇸🇪'),
+  },
+  {
+    name: 'Switzerland',
+    flag: '🇨🇭',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇨🇭'),
+  },
+  {
+    name: 'Türkiye (Turkey)',
+    flag: '🇹🇷',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇹🇷'),
+  },
+  {
+    name: 'United Arab Emirates',
+    flag: '🇦🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇦🇪'),
+  },
+  {
+    name: 'United Kingdom',
+    flag: '🇬🇧',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇬🇧'),
+  },
+  {
+    name: 'United States',
+    flag: '🇺🇸',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇺🇸'),
+  },
+  {
+    name: 'Venezuela',
+    flag: '🇻🇪',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇻🇪'),
+  },
+  {
+    name: 'Zimbabwe',
+    flag: '🇿🇼',
+    similarFlags: easySimilarFlags.filter((flag) => flag !== '🇿🇼'),
+  },
+];
+
 export const countries: Country[] = [
   {
     name: 'Afghanistan',
@@ -187,16 +433,6 @@ export const countries: Country[] = [
     similarFlags: ['🇪🇨', '🇻🇪', '🇩🇴', '🇲🇽', '🇵🇪', '🇧🇴', '🇬🇳', '🇸🇳', '🇲🇱', '🇨🇮'],
   },
   {
-    name: 'Democratic Republic of the Congo',
-    flag: '🇨🇩',
-    similarFlags: ['🇬🇦', '🇨🇬', '🇹🇩', '🇳🇪', '🇧🇯', '🇸🇳', '🇲🇱', '🇬🇳', '🇮🇩', '🇮🇹'],
-  },
-  {
-    name: 'Republic of Congo',
-    flag: '🇨🇬',
-    similarFlags: ['🇬🇦', '🇹🇩', '🇨🇩', '🇳🇪', '🇧🇯', '🇸🇳', '🇲🇱', '🇬🇳', '🇬🇭', '🇧🇷'],
-  },
-  {
     name: 'Costa Rica',
     flag: '🇨🇷',
     similarFlags: ['🇹🇭', '🇳🇮', '🇬🇹', '🇭🇳', '🇸🇻', '🇬🇷', '🇬🇩', '🇩🇴', '🇪🇨', '🇧🇯'],
@@ -225,6 +461,11 @@ export const countries: Country[] = [
     name: 'Czech Republic (Czechia)',
     flag: '🇨🇿',
     similarFlags: ['🇸🇰', '🇸🇮', '🇷🇺', '🇸🇪', '🇳🇱', '🇷🇸', '🇧🇬', '🇲🇰', '🇲🇪', '🇦🇱'],
+  },
+  {
+    flag: '🇨🇩',
+    name: 'Democratic Republic of the Congo',
+    similarFlags: ['🇬🇦', '🇨🇬', '🇹🇩', '🇳🇪', '🇧🇯', '🇸🇳', '🇲🇱', '🇬🇳', '🇮🇩', '🇮🇹'],
   },
   {
     name: 'Denmark',
@@ -384,7 +625,7 @@ export const countries: Country[] = [
   {
     name: 'India',
     flag: '🇮🇳',
-    similarFlags: ['🇮🇪', '🇮🇷', '🇲🇽', '🇳🇪', '🇨🇮', '🇧🇯', '🇪🇹', 'SN', '🇰🇪', '🇹🇿'],
+    similarFlags: ['🇮🇪', '🇮🇷', '🇲🇽', '🇳🇪', '🇨🇮', '🇧🇯', '🇪🇹', '🇸🇳', '🇰🇪', '🇹🇿'],
   },
   {
     name: 'Indonesia',
@@ -405,12 +646,6 @@ export const countries: Country[] = [
     name: 'Ireland',
     flag: '🇮🇪',
     similarFlags: ['🇮🇳', '🇨🇮', '🇧🇯', '🇳🇪', '🇬🇭', '🇲🇽', '🇪🇹', '🇸🇳', '🇬🇳', '🇰🇪'],
-  },
-
-  {
-    name: 'Palestine',
-    flag: '🇵🇸',
-    similarFlags: ['🇯🇴', '🇰🇼', '🇦🇪', '🇪🇭', '🇶🇦', '🇪🇬', '🇾🇪', '🇸🇾', '🇸🇩', '🇮🇶'],
   },
   {
     name: 'Italy',
@@ -467,7 +702,6 @@ export const countries: Country[] = [
     flag: '🇱🇦',
     similarFlags: ['🇹🇭', '🇻🇳', '🇰🇭', '🇲🇲', '🇮🇩', '🇯🇵', '🇵🇭', '🇧🇩', '🇹🇼', '🇨🇳'],
   },
-
   {
     name: 'Latvia',
     flag: '🇱🇻',
@@ -649,9 +883,14 @@ export const countries: Country[] = [
     similarFlags: ['🇮🇳', '🇮🇶', '🇮🇷', '🇦🇫', '🇹🇷', '🇹🇲', '🇰🇿', '🇰🇬', '🇺🇿', '🇧🇩'],
   },
   {
-    name: 'Palau',
     flag: '🇵🇼',
     similarFlags: ['🇲🇾', '🇮🇩', '🇫🇯', '🇹🇴', '🇳🇷', '🇩🇪', '🇨🇿', '🇵🇱', '🇸🇰', '🇸🇮'],
+    name: 'Palau',
+  },
+  {
+    flag: '🇵🇸',
+    name: 'Palestine',
+    similarFlags: ['🇯🇴', '🇰🇼', '🇦🇪', '🇪🇭', '🇶🇦', '🇪🇬', '🇾🇪', '🇸🇾', '🇸🇩', '🇮🇶'],
   },
   {
     name: 'Panama',
@@ -692,6 +931,11 @@ export const countries: Country[] = [
     name: 'Qatar',
     flag: '🇶🇦',
     similarFlags: ['🇦🇪', '🇴🇲', '🇰🇼', '🇧🇭', '🇾🇪', '🇸🇦', '🇮🇶', '🇮🇷', '🇲🇦', '🇪🇬'],
+  },
+  {
+    flag: '🇨🇬',
+    name: 'Republic of Congo',
+    similarFlags: ['🇬🇦', '🇹🇩', '🇨🇩', '🇳🇪', '🇧🇯', '🇸🇳', '🇲🇱', '🇬🇳', '🇬🇭', '🇧🇷'],
   },
   {
     name: 'Romania',
