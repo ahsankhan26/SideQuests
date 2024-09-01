@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { LayoutGroup, motion } from 'framer-motion';
 
 import {
   easy,
@@ -25,7 +26,7 @@ const CountryCapitalGame: React.FC = () => {
   const [correctScore, setCorrectScore] = useState(0);
   const [percentScore, setPercentScore] = useState(0);
 
-  const resetGame = (isHard?: boolean) => {
+  const resetGame = useCallback((isHard?: boolean) => {
     const infoData = isHard ? hard : easy;
     // get random values;
     const info = getRandomSubObject(infoData, DIFFICULTY.EASY);
@@ -45,12 +46,12 @@ const CountryCapitalGame: React.FC = () => {
       arr.slice(0, isHard ? DIFFICULTY.HARD : DIFFICULTY.EASY),
     );
     setGameData(shuffledArr);
-  };
+  }, []);
 
-  const changeDifficulty = (isHard: boolean) => {
+  const changeDifficulty = useCallback((isHard: boolean) => {
     setData(isHard ? hard : easy);
     resetGame(isHard);
-  };
+  }, []);
 
   useEffect(() => {
     setData(easy);
@@ -138,41 +139,51 @@ const CountryCapitalGame: React.FC = () => {
           </label>
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
-        {gameData?.map((item) => (
-          <Button
-            className={cn('btn-lg h-40', {
-              'btn-primary border-4 border-info':
-                currentSelected?.includes(item) && !isWrong,
-              'btn-error border-4 border-error-content':
-                currentSelected?.includes(item) && isWrong,
-              'btn-neutral': !currentSelected?.includes(item),
-            })}
-            key={item}
-            onClick={() => {
-              setCurrentSelected((prev) => {
-                if (isWrong) {
-                  setIsWrong(false);
-                  setScore((count) => count + 1);
-                  return [item];
-                }
-                // unselect if already selected and update score
-                if (prev.includes(item)) {
-                  setScore((count) => (count > 0 ? count - 1 : 0));
-                  return prev.filter((i) => i !== item);
-                }
-                if (prev.length < 2 && !prev.includes(item)) {
-                  setScore((count) => count + 1);
-                  return [...prev, item];
-                }
-                return prev;
-              });
-            }}
-          >
-            {item}
-          </Button>
-        ))}
-      </div>
+      <motion.div
+        className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'
+        id='grid'
+        layout
+      >
+        <LayoutGroup>
+          {gameData?.map((item) => (
+            <motion.div
+              className={cn(
+                'flex-center select-none font-semibold uppercase cursor-pointer text-center transition-colors rounded-lg btn-lg h-40',
+                {
+                  'btn-primary border-4 border-info':
+                    currentSelected?.includes(item) && !isWrong,
+                  'btn-error border-4 border-error-content':
+                    currentSelected?.includes(item) && isWrong,
+                  'btn-neutral': !currentSelected?.includes(item),
+                },
+              )}
+              key={item}
+              layout
+              onClick={() => {
+                setCurrentSelected((prev) => {
+                  if (isWrong) {
+                    setIsWrong(false);
+                    setScore((count) => count + 1);
+                    return [item];
+                  }
+                  // unselect if already selected and update score
+                  if (prev.includes(item)) {
+                    setScore((count) => (count > 0 ? count - 1 : 0));
+                    return prev.filter((i) => i !== item);
+                  }
+                  if (prev.length < 2 && !prev.includes(item)) {
+                    setScore((count) => count + 1);
+                    return [...prev, item];
+                  }
+                  return prev;
+                });
+              }}
+            >
+              {item}
+            </motion.div>
+          ))}
+        </LayoutGroup>
+      </motion.div>
     </div>
   );
 };
