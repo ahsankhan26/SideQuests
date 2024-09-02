@@ -88,7 +88,7 @@
               "ModalFooter",
               "Button"
             ],
-            "message": "Restricted `react-modal` imports:\n\n[Modal]\n Please use `<Modal />` from `react-modal` for consistency.\n\n[ModalHeader, ModalBody, ModalFooter]\n Please use the modal subcomponents from `src/components/modal` for consistency.\n\n[Button]\nPlease use `<Button />` from `src/components/button` for consistency.",
+            "message": "Restricted `react-modal` imports:\n\n[Modal]\n Please use `<Modal />` from `react-modal` for consistency.\n\n[ModalHeader, ModalBody, ModalFooter]\n Please use the modal subcomponents from `src/components/modal` for consistency.\n\n[Button]\nPlease use `<Button />` from `src/components/button` for consistency."
           }
         ]
       }

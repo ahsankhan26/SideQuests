@@ -36,7 +36,7 @@ export const Typography: React.FC<TypographyProps> = ({
     'text-title': variant === 'heading' || variant === 'title',
     'text-title2': variant === 'title2',
     'text-sub-title': variant === 'subTitle',
-    'text-2xl': variant === 'subTitle2',
+    'text-lg md:text-2xl': variant === 'subTitle2',
     'text-base':
       variant === 'h4' ||
       variant === 'h5' ||
